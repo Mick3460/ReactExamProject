@@ -1,10 +1,10 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-export default function TestPage() {
+export default function LoggedInLanding() {
     return (
         <View style={styles.container}>
-            <Text>TEST PAGE, ER HER BARE FOR AT VISE EN SCREEN</Text>
+            <Text>FORSIDE FOR BRUGERE SOM ER LOGGET IND</Text>
         </View>
     );
 }

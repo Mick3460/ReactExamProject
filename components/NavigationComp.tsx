@@ -8,7 +8,10 @@ import { NavigationContainer } from '@react-navigation/native';
 import LandingPage from "../screens/LandingPage";
 import SignUpPage from "../screens/SignUpPage";
 import TestPage from "../screens/TestPage";
+import LoggedInLandingPage from "../screens/LoggedInLanding"
+
 let user: any = undefined;
+//let user: any = {mads: "sucks balls"};
 
 
 const Stack = createNativeStackNavigator<StackParamList>();
@@ -17,8 +20,8 @@ const Tab = createBottomTabNavigator();
 function LoggedInStackNavigator() {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="LandingPage" component={LandingPage} options={{ headerShown: false }}/>
-      <Stack.Screen name="SignUpPage" component={SignUpPage} options={{ headerShown: false }}/>
+      <Stack.Screen name="LoggedInLandingPage" component={LoggedInLandingPage} options={{ headerShown: false }}/>
+      <Stack.Screen name="TestPage" component={TestPage} options={{ headerShown: false }}/>
     </Stack.Navigator>
   );
 }
@@ -49,17 +52,15 @@ function HomeChatStackNavigator() {
         <NavigationContainer>
             {user !== undefined ? (
             <Tab.Navigator screenOptions={{ headerShown: false }}>
-                <Tab.Screen name="Chat" component={LoggedInStackNavigator} />
-                <Tab.Screen name="I dnu" component={TestPage} />
-                <Tab.Screen name="Something" component={TestPage} />
-                <Tab.Screen name="HomeScreen" component={TestPage} />
+                <Tab.Screen name="HOMESCREEN" component={LoggedInStackNavigator} />
+                <Tab.Screen name="Test Page" component={TestPage} />
             </Tab.Navigator>
 
                 ) : (
 
             <Tab.Navigator screenOptions={{ headerShown: false }}>
-                <Tab.Screen name="LandingPage" component={LandingStackNavigator} />
-                <Tab.Screen name="SignUpPage" component={SignUpPage} />
+                <Tab.Screen name="Landing Page" component={LandingStackNavigator} />
+                <Tab.Screen name="SignUp Page" component={SignUpPage} />
             </Tab.Navigator>
             )}
         </NavigationContainer>

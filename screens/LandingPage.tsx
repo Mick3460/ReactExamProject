@@ -64,12 +64,10 @@ export default function HomeScreen() {
             <Text style={styles.hugeText}>Landing Page</Text>
             <Text>{user?.email}</Text>
             <Text style={{fontSize: 4, width:300}}>{user?.idToken}</Text>
-            <Text>Is Michael happy? ..no  </Text>      
+            <Text>Is Michael happy? ..no  </Text>    
+            <Text>Not a user yet? Sign up and gives us all your data!</Text>  
             <Button title="Sign up" onPress={() => navigation.navigate("SignUpPage" )} />
-            
-            <Text>Below is the current user email and id token:</Text> 
-          
-        
+
         <Text>Log in using social networks</Text>
 
         {/**IKONER TIL GOOGLE OG FACEBOOK */}

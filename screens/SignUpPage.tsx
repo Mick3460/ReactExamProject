@@ -1,27 +1,28 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
-//import { useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { StackParamList } from '../typings/navigations';
 import LandingPage from "./LandingPage"
+import { signUp } from '../store/actions/user.actions';
 
 
-export default function Screen2() {
+export default function SignUpPage() {
 
     type ScreenNavigationType = NativeStackNavigationProp<
     StackParamList,"LandingPage" >
     const [text, setText] = useState('')
     const [passwordStr, setPasswordStr] = useState('')
-    //const dispatch = useDispatch() //useDispatch er en hook :)
+    const dispatch = useDispatch() //useDispatch er en hook :)
     const navigation = useNavigation<ScreenNavigationType>()
     
     function handleAddUser () {
         const email = text;
         const pw = passwordStr;
         
-        //dispatch(signup(email,pw));
-        //navigation.navigate("LandingPage")
+        dispatch(signUp(email,pw));
+        navigation.navigate("LandingPage")
     }
     return (
         <View style={styles.container}>

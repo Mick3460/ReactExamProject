@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Button, StyleSheet, Text, TextInput, View, Image, TouchableOpacity } from 'react-native';
-//import { User } from '../entities/User';
-//import { useDispatch, useSelector } from 'react-redux';
-//import { signin, logout, rehydrateUser } from '../store/actions/user.actions';
+import { User } from '../entities/User';
+import { useDispatch, useSelector } from 'react-redux';
+import { signIn, } from '../store/actions/user.actions';
+//import { logOut } from '../store/actions/chat.actions';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { StackParamList } from '../typings/navigations';
 //import * as SecureStore from 'expo-secure-store'
-//import { logOut } from '../store/actions/chat.actions';
 import SignUpPage from "./SignUpPage"
 
 type ScreenNavigationType = NativeStackNavigationProp<
@@ -15,46 +15,25 @@ type ScreenNavigationType = NativeStackNavigationProp<
     "SignUpPage"
 >
 
-export default function HomeScreen() {
+export default function LandingPage() {
     const [loginText, setLoginText] = useState('')
     const [loginPw, setLoginPw] = useState('')
-    let user = {email: "email@lol.dk", idToken: "lolll"}
-    //const dispatch = useDispatch() //useDispatch er en hook :)
-    //const user: User = useSelector((state: any) => state.user.loggedInUser) // subscribe to redux store and select attribute 
-    //const validUser = useSelector((state: any) => state.user.validUser) // subscribe to redux store and select attribute 
-    //const isHappy = useSelector((state: any) => state.chat.isHappy) // subscribe to redux store and select attribute (isHappy)
     
-    /*
-    async function readPersistedUserInfo() {
-        const idToken = await SecureStore.getItemAsync('token');
-        const userJson = await SecureStore.getItemAsync('user');
-        let user = null; //bad code?
-        if (userJson) {
-            user = JSON.parse(userJson)
-        }
-        if (user) {
-            //then we've had someone log in before..
-            //restore the signup by updating the redux store based on user and token
-           // dispatch(rehydrateUser(user,idToken!))  //Hvis du er sikker på den IKKE er null, så kan du skrive variable! 
-        }
-      }
-      */
+    const dispatch = useDispatch() //useDispatch er en hook :)
+    const user: User = useSelector((state: any) => state.user.loggedInUser) // subscribe to redux store and select attribute 
+    const validUser = useSelector((state: any) => state.user.validUser) // subscribe to redux store and select attribute 
+    
+
     //const Stack = createNativeStackNavigator<StackParamList>();
     //const Tab = createBottomTabNavigator();
     const navigation = useNavigation<ScreenNavigationType>()
 
-
-
     async function handleSignIn () {
         const email = loginText;
         const pw = loginPw;
-        //dispatch(signin(email,pw))
+        dispatch(signIn(email,pw))
     }
 
-    function handleLogOut(){
-       // dispatch(logout()) // user-clearing method
-       // dispatch(logOut()) // chat-clearing method
-    }
 
     return (
         
@@ -62,8 +41,6 @@ export default function HomeScreen() {
         
         <View style={styles.leftOuterBox}>
             <Text style={styles.hugeText}>Landing Page</Text>
-            <Text>{user?.email}</Text>
-            <Text style={{fontSize: 4, width:300}}>{user?.idToken}</Text>
             <Text>Is Michael happy? ..no  </Text>    
             <Text>Not a user yet? Sign up and gives us all your data!</Text>  
             <Button title="Sign up" onPress={() => navigation.navigate("SignUpPage" )} />
@@ -99,8 +76,7 @@ export default function HomeScreen() {
             <TextInput value={loginPw} secureTextEntry={true} onChangeText={setLoginPw} style={styles.textInput} placeholder="Password" />
             <TouchableOpacity onPress={handleSignIn} style={styles.appButtonContainerLeft}>
                     <Text style={styles.appButtonTextLeft}>SIGN IN</Text>
-                </TouchableOpacity>
-            <Button onPress={handleLogOut} title="log out"/>
+            </TouchableOpacity>
         </View>
 
         </View>

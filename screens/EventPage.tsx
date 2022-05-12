@@ -1,12 +1,12 @@
 import React from 'react';
-import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import EventBlogComp from '../components/EventBlogComp';
 
 export default function TestPage() {
     return (
-        <SafeAreaView style={styles.container}>
+        <View style={styles.container}>
             <EventBlogComp/>
-        </SafeAreaView >
+        </View>
     );
 }
 

@@ -16,8 +16,8 @@ type ScreenNavigationType = NativeStackNavigationProp<
 >
 
 export default function LandingPage() {
-    const [loginText, setLoginText] = useState('')
-    const [loginPw, setLoginPw] = useState('')
+    const [loginText, setLoginText] = useState('lol@lol.dk')
+    const [loginPw, setLoginPw] = useState('lol123')
     
     const dispatch = useDispatch() //useDispatch er en hook :)
     const user: User = useSelector((state: any) => state.user.loggedInUser) // subscribe to redux store and select attribute 

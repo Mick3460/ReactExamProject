@@ -11,6 +11,7 @@ import SignUpPage from "../screens/SignUpPage";
 import TestPage from "../screens/TestPage";
 import LoggedInLandingPage from "../screens/LoggedInLanding"
 import { updateUser } from '../store/actions/user.actions';
+import ProfilePage from '../screens/ProfilePage';
 
 let user: any = undefined;
 
@@ -65,6 +66,7 @@ export default function NavigationComp () {
               <Tab.Navigator screenOptions={{ headerShown: false }}>
                 <Tab.Screen name="HOMESCREEN" component={LoggedInStackNavigator} />
                 <Tab.Screen name="Test Page" component={TestPage} />
+                <Tab.Screen name="Profile" component={ProfilePage}/>
             </Tab.Navigator>
 
                 ) : (

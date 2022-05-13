@@ -10,8 +10,6 @@ import chatReducer from './store/reducers/chat.reducer';
 import userReducer from './store/reducers/user.reducer';
 
 
-
-
 // Import the functions you need from the SDKs you need
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -19,7 +17,8 @@ import userReducer from './store/reducers/user.reducer';
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 import { initializeApp } from "firebase/app";
-import {getDatabase} from "firebase/database"
+import { getFirestore, collection, addDoc, collectionGroup } from 'firebase/firestore';
+
 
 const firebaseConfig = {
   apiKey: "AIzaSyA5Yl0sy-HhRBnKNjhYUH0A52O0J2h8gMA",
@@ -34,7 +33,23 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const database = getDatabase(app)
+export const db = getFirestore(app)
+
+
+const lol =  async () => {
+  try {
+    const docRef = await addDoc(collection(db, "chatMessage"), {
+      username: "",
+      chatMessage: "lol jim"
+    })
+  } catch (e){
+    console.log(e)
+  }
+}
+
+
+//lol()
+
 
 
 
@@ -48,10 +63,10 @@ const rootReducer = combineReducers({
 const store = createStore(rootReducer, applyMiddleware(ReduxThunk))
 
 export default function App() {
-  
+
   return (
     <Provider store={store}>
-    <NavigationComp></NavigationComp>
+      <NavigationComp></NavigationComp>
     </Provider>
   );
 }

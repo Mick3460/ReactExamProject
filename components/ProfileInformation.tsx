@@ -1,13 +1,8 @@
 import { View, Text, Image, StyleSheet, Button, Dimensions } from 'react-native'
 import React from 'react'
+import { UserInfo } from '../entities/UserInfo'
 
 
-export type UserInfo = {
-    userAvatarUrl: string,
-    userFullName: string,
-    userEmail: string,
-    userEducationalCredentials: string,
-}
 
 interface Props {
     userInfo: UserInfo

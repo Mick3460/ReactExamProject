@@ -1,9 +1,10 @@
 import { View, Button } from 'react-native'
 import React from 'react'
-import { ProfileInformation, UserInfo} from '../components/ProfileInformation'
+import { ProfileInformation} from '../components/ProfileInformation'
 import Seperator from '../components/Seperator'
 import { useDispatch } from 'react-redux'
 import { logOut } from '../store/actions/user.actions'
+import { UserInfo } from '../entities/UserInfo'
 
 const userInfo: UserInfo = {
     userAvatarUrl: 'https://reactnative.dev/img/tiny_logo.png',

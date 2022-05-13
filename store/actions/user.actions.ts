@@ -19,6 +19,11 @@ export const logOut = () => {
     return {type: LOGOUT}
 }
 
+
+export const signInFirebase = () => {
+    
+}
+
 export const signIn = (email: string, password: string) => {
     
     const url = "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key="+KEY;

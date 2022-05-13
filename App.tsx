@@ -17,7 +17,7 @@ import userReducer from './store/reducers/user.reducer';
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, addDoc, collectionGroup } from 'firebase/firestore';
+import { getFirestore, collection, addDoc, collectionGroup, getDoc, doc, setDoc, onSnapshot, query, where, getDocs } from 'firebase/firestore';
 
 
 const firebaseConfig = {
@@ -36,23 +36,77 @@ const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app)
 
 
-const lol =  async () => {
+//document reference  "specialtyoftheday"
+const docReference = doc(db,"chatMessage/zQhBRb7nqAb2KWnG3eET") //doc(ref to firestore, path to doc)
+
+//write or change document, use setDoc
+async function changeTheDocument() { //testet, virker
+  const docData = {
+    chatMessage: "lol mads sucks balls",
+    username: "jimmys mor"
+  }
+  await setDoc(docReference, docData)   //updateDoc opdaterer kun de ting man specificerer, men error'er hvis det ikke findes
+  //lav try catch istedet lol
+}
+
+
+//add new document to collection without specifying ID
+//Using a collection reference instead of document reference.
+async function addANewDocument() {
   try {
-    const docRef = await addDoc(collection(db, "chatMessage"), {
-      username: "",
-      chatMessage: "lol jim"
+    const newDoc = await addDoc(collection(db, "users"), { 
+      userName: "Ur mamma",
+      first: "Michael",
+      last: "Big papa",
+      email: "lol@lol.dk"
     })
   } catch (e){
     console.log(e)
   }
 }
 
+//read a single doc.. needs a document reference
+//const docReference = doc(db,"chatMessage/zQhBRb7nqAb2KWnG3eET")
+async function readASingleDocument() {
+  const docReff = doc(db,"users/SdOF7X8LErDJGGbieagm")
+  const mySnapshot = await getDoc(docReff)
+  if (mySnapshot.exists()) {
+    const docData = mySnapshot.data()
+    console.log("My data is:", JSON.stringify(docData));
+    
+  }
+}
+//listen to a document changes in realtime with a snapshot listener
+//there's a little more to this and has an unsub function.. https://www.youtube.com/watch?v=BjtxPj6jRM8 7:45 ish
+function listenToADocument() {
+  onSnapshot(docReference, (docSnapshop) => { //pass in document and listener. The listener is a function that takes a snapshot ref and does something
+    if(docSnapshop.exists()) {
+      const docData = docSnapshop.data()
+      console.log("docSnapshot, in real time docData is: ", JSON.stringify(docData));
+      
+    }
+  } ) 
+}
 
-//lol()
+//get multiple docs
+async function queryForDocuments() {
+  const ourQuery = query( //pass in constraint for query
+    collection(db, "users"), //collection
+    where("email", "==", "lol@lol.dk")
+    //could add orderBy('name')
+    //limit(10)  fx med "chatmessages"
 
+  )
 
+  const querySnapshot = await getDocs(ourQuery) //array of documents
+  const allDocs = querySnapshot.docs
+  //OOOOOR
+  const allDocss = querySnapshot.forEach( (snap) => {
+    console.log("Snap id: ",snap.id, " contains: ",JSON.stringify(snap.data()));
+    
+  })
 
-
+}
 
 const rootReducer = combineReducers({
   user: userReducer,

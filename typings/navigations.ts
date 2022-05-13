@@ -3,5 +3,8 @@ export type StackParamList = {
     SignUpPage: undefined;
     TestPage: undefined;
     LoggedInLandingPage: undefined;
+    ChatroomsPage: undefined;
+
+
     Homescreen: undefined;
 }

@@ -10,7 +10,6 @@ const KEY = "AIzaSyA5Yl0sy-HhRBnKNjhYUH0A52O0J2h8gMA";
 
 
 export const updateUser = (userJson: any) => {
-
     return {type: UPDATE_USER, payload:{userJson}}
 }
 

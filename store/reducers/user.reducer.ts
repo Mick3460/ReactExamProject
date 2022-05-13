@@ -35,13 +35,11 @@ const userReducer = (state: ReduxState = initialState, action: any) => {
             } else {
                 return state
             }
+            
         case LOGOUT:
-            console.log("logOut case reached in reducer");
             return {...state, validUser: false, loggedInUser: undefined, idToken: undefined}
             
         case UPDATE_USER:
-            console.log("UPDATE USER case reached in reducer");
-            
             return {...state, validUser: true, loggedInUser: action.payload.userJson}
         default: 
             return state;

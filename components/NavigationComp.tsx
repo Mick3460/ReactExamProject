@@ -12,6 +12,8 @@ import TestPage from "../screens/TestPage";
 import LoggedInLandingPage from "../screens/LoggedInLanding"
 import { updateUser } from '../store/actions/user.actions';
 import ProfilePage from '../screens/ProfilePage';
+import ChatroomsPage from '../screens/ChatroomsPage';
+import {User} from "../entities/User"
 
 let user: any = undefined;
 
@@ -23,6 +25,7 @@ function LoggedInStackNavigator() {
     <Stack.Navigator>
       <Stack.Screen name="LoggedInLandingPage" component={LoggedInLandingPage} options={{ headerShown: false }}/>
       <Stack.Screen name="TestPage" component={TestPage} options={{ headerShown: false }}/>
+      <Stack.Screen name="ChatroomsPage" component={ChatroomsPage} options={{ headerShown: false }}/>
     </Stack.Navigator>
   );
 }
@@ -47,25 +50,26 @@ export default function NavigationComp () {
     userJson = await SecureStore.getItemAsync('user');
 
     if (userJson) {
-      return {email: userJson.email, idToken: userJson.idToken}
+      let userParsing = JSON.parse(userJson)
+      let parsedUser = new User(userParsing.email, undefined, undefined, userParsing.idToken)
+      return parsedUser
     } else {
       return undefined;
     }
   }
   
   useEffect(() => {
-    readPersistedUserInfo().then(response=>dispatch(updateUser(response)) )
-      
-  },
-  // array of variables that can trigger an update if they change. Pass an
-  // an empty array if you just want to run it once after component mounted. 
-  [])
+    readPersistedUserInfo()
+    .then( response => dispatch( updateUser(response!) ) ) 
+  }, [])// array of variables that can trigger an update if they change. Pass an// an empty array if you just want to run it once after component mounted. 
+  
   return (
     <NavigationContainer>
             {user !== undefined ? (
-              <Tab.Navigator screenOptions={{ headerShown: false }}>
+            <Tab.Navigator screenOptions={{ headerShown: false }}>
                 <Tab.Screen name="HOMESCREEN" component={LoggedInStackNavigator} />
                 <Tab.Screen name="Test Page" component={TestPage} />
+                <Tab.Screen name="Chat" component={ChatroomsPage} />
                 <Tab.Screen name="Profile" component={ProfilePage}/>
             </Tab.Navigator>
 

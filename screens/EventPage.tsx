@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import EventBlogComp from '../components/EventBlogComp';
 
-export default function TestPage() {
+export default function EventPage() {
     return (
         <View style={styles.container}>
             <EventBlogComp/>

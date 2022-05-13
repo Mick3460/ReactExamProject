@@ -4,6 +4,7 @@ export type StackParamList = {
     TestPage: undefined;
     LoggedInLandingPage: undefined;
     ChatroomsPage: undefined;
+    ProfilePage: undefined;
 
 
     Homescreen: undefined;

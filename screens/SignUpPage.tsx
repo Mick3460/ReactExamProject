@@ -5,23 +5,23 @@ import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { StackParamList } from '../typings/navigations';
 import LandingPage from "./LandingPage"
-import { signUp } from '../store/actions/user.actions';
+import { signUp,signUpFirebase } from '../store/actions/user.actions';
 
 
 export default function SignUpPage() {
 
     type ScreenNavigationType = NativeStackNavigationProp<
     StackParamList,"LandingPage" >
-    const [text, setText] = useState('')
-    const [passwordStr, setPasswordStr] = useState('')
+    const [text, setText] = useState('jim@ergod.dk')
+    const [passwordStr, setPasswordStr] = useState('lol123')
     const dispatch = useDispatch() //useDispatch er en hook :)
     const navigation = useNavigation<ScreenNavigationType>()
     
     function handleAddUser () {
         const email = text;
         const pw = passwordStr;
-        
-        dispatch(signUp(email,pw));
+        signUpFirebase(email,pw)
+        //dispatch(signUp(email,pw));
         navigation.navigate("LandingPage")
     }
     return (

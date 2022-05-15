@@ -1,6 +1,10 @@
 import { User } from "../../entities/User";
 import { FirebaseSignupSuccess } from "../../entities/FirebaseSignupSuccess";
 import * as SecureStore from 'expo-secure-store'
+import {auth} from "../../App"
+import {createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, onAuthStateChanged} from "firebase/auth"
+import { addDoc, collection, doc, getDoc, setDoc } from "firebase/firestore";
+import { db } from "../../App";
 
 export const SIGNUP = 'SIGNUP';
 export const SIGNIN = 'SIGNIN';
@@ -19,9 +23,86 @@ export const logOut = () => {
     return {type: LOGOUT}
 }
 
+async function addANewUserToFireStore(user: User) {
+    try {
+        const docRef = doc(db,"users/"+user.uid)
 
-export const signInFirebase = () => {
+        const newDoc = await setDoc(docRef, { 
+        displayName: user.displayname,
+        first: "Michael",
+        last: "Big papa",
+        email: user.email,
+        uid: user.uid,
+        photoURL: user.photoUrl,
+        connectedChatroomIds: [1,2]
+      })
+    } catch (e){
+      console.log(e)
+    }
+  }
+
+  async function readASingleUserDocument(path:string) {
+    console.log("using this path: ",path); 
+    console.log("READING A SINGLE DOCUMENT METHOD");
     
+    const docReff = doc(db,path)
+    const mySnapshot = await getDoc(docReff)
+    //console.log(mySnapshot);
+    
+    if (mySnapshot.exists()) {
+      const docData = mySnapshot.data()
+      console.log(docData);
+      console.log("My data is:", JSON.stringify(docData));
+      
+      
+    }
+  }
+
+export const signUpFirebase = (email: string,password: string) => {
+    
+    createUserWithEmailAndPassword(auth,email,password)
+    .then( (userCredential) => {
+        
+        const user: any = userCredential.user
+
+        //console.log("signUpFireBase action, user:",user);
+        //console.log("signUpFireBase action, user.email:",user.email); //works userCredential._tokenResponse.idToken
+        //console.log("signUpFireBase action, user.stsTokenManager:",user.stsTokenManager); 
+        //console.log("signUpFireBase action, user.stsTokenManager.accessToken:",user.stsTokenManager.accessToken); //works userCredential._tokenResponse.idToken      
+        
+        if (user.email != null){
+        const userr = new User(user.email, user.displayName as string ,user.photoURL as string, user.stsTokenManager.accessToken as string, user.uid)
+        //console.log("userr:",userr);
+        addANewUserToFireStore(userr)
+        return {type: SIGNUP}
+        }
+    })
+    .catch( (error) => {
+        const errorCode = error.code
+        const errorMessage = error.message
+        console.log("errorCode:",errorCode);
+        console.log("errorMessage:",errorMessage);
+        
+    })
+}
+
+export const signInFirebase = (email:string ,password: string) => {
+        
+    signInWithEmailAndPassword(auth,email,password)
+    .then( async (userCredential) => {
+        const user = userCredential.user
+        const userUid = user.uid
+        //check if user is in FireStore
+        let docRef = doc(db,"users/"+userUid)  
+        readASingleUserDocument("users/"+userUid)
+    })
+    .catch( (error) => {
+        const errorCode = error.code
+        const errorMessage = error.message
+        console.log("errorCode:",errorCode);
+        console.log("errorMessage:",errorMessage);
+    })
+    return {type:SIGNIN , payload: {registered: true}} //TODO:FIKS
 }
 
 export const signIn = (email: string, password: string) => {

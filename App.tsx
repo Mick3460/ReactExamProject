@@ -18,6 +18,7 @@ import userReducer from './store/reducers/user.reducer';
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 import { initializeApp } from "firebase/app";
 import { getFirestore, collection, addDoc, collectionGroup, getDoc, doc, setDoc, onSnapshot, query, where, getDocs } from 'firebase/firestore';
+import { getAuth } from 'firebase/auth';
 
 
 const firebaseConfig = {
@@ -33,6 +34,7 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+export const auth = getAuth(app)
 export const db = getFirestore(app)
 
 

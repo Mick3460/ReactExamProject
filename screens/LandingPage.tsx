@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Button, StyleSheet, Text, TextInput, View, Image, TouchableOpacity } from 'react-native';
 import { User } from '../entities/User';
 import { useDispatch, useSelector } from 'react-redux';
-import { signIn, } from '../store/actions/user.actions';
+import { signIn, signInFirebase, } from '../store/actions/user.actions';
 //import { logOut } from '../store/actions/chat.actions';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
@@ -16,7 +16,7 @@ type ScreenNavigationType = NativeStackNavigationProp<
 >
 
 export default function LandingPage() {
-    const [loginText, setLoginText] = useState('lol@lol.dk')
+    const [loginText, setLoginText] = useState('mjim@ergod.dk')
     const [loginPw, setLoginPw] = useState('lol123')
     
     const dispatch = useDispatch() //useDispatch er en hook :)
@@ -31,7 +31,8 @@ export default function LandingPage() {
     async function handleSignIn () {
         const email = loginText;
         const pw = loginPw;
-        dispatch(signIn(email,pw))
+        dispatch(signInFirebase(email,pw))
+        //dispatch(signIn(email,pw))
     }
 
 

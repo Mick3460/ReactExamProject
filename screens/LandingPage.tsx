@@ -12,7 +12,7 @@ import SignUpPage from "./SignUpPage"
 
 type ScreenNavigationType = NativeStackNavigationProp<
     StackParamList,
-    "SignUpPage"
+    "SignUp Page"
 >
 
 export default function LandingPage() {
@@ -32,7 +32,6 @@ export default function LandingPage() {
         const email = loginText;
         const pw = loginPw;
         dispatch(await signInFirebase(email,pw))
-        //dispatch(signIn(email,pw))
     }
 
 
@@ -44,7 +43,7 @@ export default function LandingPage() {
             <Text style={styles.hugeText}>Landing Page</Text>
             <Text>Is Michael happy? ..no  </Text>    
             <Text>Not a user yet? Sign up and gives us all your data!</Text>  
-            <Button title="Sign up" onPress={() => navigation.navigate("SignUpPage" )} />
+            <Button title="Sign up" onPress={() => navigation.navigate("SignUp Page" )} />
 
         <Text>Log in using social networks</Text>
 

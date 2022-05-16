@@ -2,25 +2,28 @@ import React, {useEffect} from "react"
 import { View, Text, FlatList, TextInput, TouchableOpacity, StyleSheet } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import {Chatroom} from "../entities/Chatroom";
-import { addChatroom, fetchChatroom } from "../store/actions/chat.actions";
+import { addChatroom, fetchChatroom, queryChatroom } from "../store/actions/chat.actions";
 
 
 export default function ChatroomsPage() {
     
-    //let chatrooms = [new Chatroom("lol","lol",new Date(),"key1"), new Chatroom("lol2","lol2",new Date(),"key2")]
     const dispatch = useDispatch()
     const [message, onChangeMessage] = React.useState('');
     const chatrooms: Chatroom[] = useSelector((state: any) => state.chat.chatrooms)
     const user = useSelector( (state:any) => state.user.loggedInUser )
     let toggleClass = false; //MAKE SOMETHING DIFFERENT THAN THIS LOL
     
-    /*
-    // This code is for it to run for the first time when your component mounts. 
-    // Think of it as the previous componentDidMount function
+    function handleFetchChatroom() {
+        dispatch(queryChatroom)
+    }
+
     useEffect(() => { 
     handleFetchChatroom()
     console.log("at launch")
     }, [] );
+    /*
+    // This code is for it to run for the first time when your component mounts. 
+    // Think of it as the previous componentDidMount function
 
     // This code is for it to run whenever your variable, timerOn, changes
     
@@ -62,7 +65,7 @@ export default function ChatroomsPage() {
                 
             <Text>user id token er: </Text>
             <Text>user id token er: </Text>
-            <Text>user id token er: </Text>
+            <Text>user id token er:{user?.connectedChatroomIds.toString()}</Text>
             <Text style={{fontSize: 6, width:300}}>idToken: {user?.idToken}</Text>
             <Text style={{fontSize: 12, width:300}}>Email:{user?.email}</Text>
 

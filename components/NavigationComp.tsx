@@ -4,7 +4,7 @@ import React, { useEffect } from 'react';
 import { StackParamList } from '../typings/navigations';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
-
+import AsyncStorage from '@react-native-community/async-storage';
 import * as SecureStore from 'expo-secure-store'
 import LandingPage from "../screens/LandingPage";
 import SignUpPage from "../screens/SignUpPage";

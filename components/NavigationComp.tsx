@@ -13,6 +13,7 @@ import LoggedInLandingPage from "../screens/LoggedInLanding"
 import { updateUser } from '../store/actions/user.actions';
 import ProfilePage from '../screens/ProfilePage';
 import ChatroomsPage from '../screens/ChatroomsPage';
+import ProfileEditPage from "../screens/ProfileEditPage"
 import {User} from "../entities/User"
 
 let user: any = undefined;
@@ -34,6 +35,15 @@ function LandingStackNavigator() {
     <Stack.Navigator>
       <Stack.Screen name="LandingPage" component={LandingPage} options={{ headerShown: false }}/>
       <Stack.Screen name="SignUpPage" component={SignUpPage} options={{ headerShown: false }}/>
+    </Stack.Navigator>
+  )
+}
+
+function ProfileStackNavigator(){
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="ProfilePage" component={ProfilePage}/>
+      <Stack.Screen name="ProfileEditPage" component={ProfileEditPage}/>
     </Stack.Navigator>
   )
 }
@@ -70,7 +80,7 @@ export default function NavigationComp () {
                 <Tab.Screen name="HOMESCREEN" component={LoggedInStackNavigator} />
                 <Tab.Screen name="Test Page" component={TestPage} />
                 <Tab.Screen name="Chat" component={ChatroomsPage} />
-                <Tab.Screen name="Profile" component={ProfilePage}/>
+                <Tab.Screen name="Profile" component={ProfileStackNavigator}/>
             </Tab.Navigator>
 
                 ) : (

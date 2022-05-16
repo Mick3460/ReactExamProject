@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux'
 import { logOut } from '../store/actions/user.actions'
 import { UserInfo } from '../entities/UserInfo'
 
+
 const userInfo: UserInfo = {
     userAvatarUrl: 'https://reactnative.dev/img/tiny_logo.png',
     userFullName: "Joe mama",

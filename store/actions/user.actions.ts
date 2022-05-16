@@ -2,9 +2,10 @@ import { User } from "../../entities/User";
 import { FirebaseSignupSuccess } from "../../entities/FirebaseSignupSuccess";
 import * as SecureStore from 'expo-secure-store'
 import {auth} from "../../App"
-import {createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, onAuthStateChanged} from "firebase/auth"
+import {createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut} from "firebase/auth"
 import { addDoc, collection, doc, getDoc, setDoc } from "firebase/firestore";
 import { db } from "../../App";
+
 
 export const SIGNUP = 'SIGNUP';
 export const SIGNIN = 'SIGNIN';
@@ -20,6 +21,9 @@ export const updateUser = (userJson: any) => {
 export const logOut = () => {
     SecureStore.deleteItemAsync('idToken')
     SecureStore.deleteItemAsync('user')
+    signOut(auth)
+    .then(() => console.log("Signed out"))
+    .catch(() => console.log("error signing out"))
     return {type: LOGOUT}
 }
 

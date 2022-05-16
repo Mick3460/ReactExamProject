@@ -1,15 +1,17 @@
 import { View, Text, Image, StyleSheet, Button, Dimensions } from 'react-native'
 import React from 'react'
 import { UserInfo } from '../entities/UserInfo'
-
+import NavigationComp from './NavigationComp'
+import { useNavigation } from "@react-navigation/native" 
 
 
 interface Props {
     userInfo: UserInfo
+    navigation: any
 }
 
 
-export const ProfileInformation: React.FC<Props> = ({userInfo}) => {
+export const ProfileInformation: React.FC<Props> = ({userInfo, navigation}) => {
     return (
         <View style={{ marginTop: 40, height: Dimensions.get('window').height / 4 }}>
             <View
@@ -37,7 +39,7 @@ export const ProfileInformation: React.FC<Props> = ({userInfo}) => {
                 style={styles.editProfileSection}
             >
                 <Button
-                    onPress={() => console.log("navigate to edit profile page")}
+                    onPress={() => navigation.navigate("Edit Profile")}
                     title='EDIT PROFILE'
                     color={'#5050A5'}
                 />

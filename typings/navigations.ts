@@ -6,6 +6,8 @@ export type StackParamList = {
     ChatroomsPage: undefined;
     ProfilePage: undefined;
     ProfileEditPage: undefined;
+    EventPage: undefined;
+    EventBlog: undefined;
 
 
     Homescreen: undefined;

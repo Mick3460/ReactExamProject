@@ -1,5 +1,5 @@
 import { User } from "../../entities/User";
-import { SIGNUP, SIGNIN, LOGOUT, UPDATE_USER, } from "../actions/user.actions";
+import { SIGNUP, SIGNIN, LOGOUT, UPDATE_USER, ERROR, } from "../actions/user.actions";
 
 
 
@@ -30,7 +30,13 @@ const userReducer = (state: ReduxState = initialState, action: any) => {
         case SIGNIN:
             if (action.payload.registered == true){
             //const fetchedUser = action.payload.user
-            return {...state, validUser: true, loggedInUser: {name: "lol"}}
+            console.log("REDUCER REACHED");
+            const user: User = action.payload.user
+            console.log(user);
+            console.log("lol");
+            
+            
+            return {...state, validUser: true, loggedInUser: action.payload.user}
             
             } else {
                 return state
@@ -41,6 +47,8 @@ const userReducer = (state: ReduxState = initialState, action: any) => {
             
         case UPDATE_USER:
             return {...state, validUser: true, loggedInUser: action.payload.userJson}
+        case ERROR:
+            return state
         default: 
             return state;
     }

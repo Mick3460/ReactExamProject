@@ -8,6 +8,7 @@ import ReduxThunk from 'redux-thunk'
 import NavigationComp from './components/NavigationComp';
 import chatReducer from './store/reducers/chat.reducer';
 import userReducer from './store/reducers/user.reducer';
+import { useNavigation } from '@react-navigation/native';
 
 
 // Import the functions you need from the SDKs you need

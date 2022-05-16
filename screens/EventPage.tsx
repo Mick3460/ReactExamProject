@@ -2,10 +2,12 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import EventBlogComp from '../components/EventBlogComp';
 
-export default function EventPage() {
+export default function EventPage({route}) {
+console.log(route.params)
+// Use the id from the route to fetch from the database
     return (
         <View style={styles.container}>
-            <EventBlogComp/>
+            <Text>Event Page</Text>
         </View>
     );
 }

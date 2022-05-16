@@ -11,6 +11,7 @@ export const SIGNUP = 'SIGNUP';
 export const SIGNIN = 'SIGNIN';
 export const LOGOUT = 'LOGOUT';
 export const UPDATE_USER = 'UPDATE_USER';
+export const ERROR = "ERROR"
 const KEY = "AIzaSyA5Yl0sy-HhRBnKNjhYUH0A52O0J2h8gMA";
 
 
@@ -30,7 +31,6 @@ export const logOut = () => {
 async function addANewUserToFireStore(user: User) {
     try {
         const docRef = doc(db,"users/"+user.uid)
-
         const newDoc = await setDoc(docRef, { 
         displayName: user.displayname,
         first: "Michael",
@@ -62,10 +62,8 @@ async function addANewUserToFireStore(user: User) {
           idToken: null, 
           uid: docData.uid, 
           connectedChatroomIds: docData.connectedChatroomIds} //, 
-      console.log(docData);
-      console.log("##########", docData.email);
+      console.log("My user", user);
       
-      console.log("My data is:", JSON.stringify(docData));
       return user
       
     }
@@ -99,26 +97,38 @@ export const signUpFirebase = (email: string,password: string) => {
     })
 }
 
-export const signInFirebase = (email:string ,password: string) => {
-        
+export const signInFirebase = async (email:string ,password: string) => {
+    let ourUser : User = {
+        email: email,
+        uid: undefined,
+        connectedChatroomIds: undefined
+    }
     signInWithEmailAndPassword(auth,email,password)
     .then( async (userCredential) => {
         const fetchedUser = userCredential.user
         const userUid = fetchedUser.uid
-        const idToken = userCredential._tokenResponse.idToken
+        const idToken = userCredential._tokenResponse.idToken //_token is definitely a thing
         //check if user is in FireStore 
-        const test = await readASingleUserDocument("users/"+userUid)
-        //ourUser.idToken = idToken
+        ourUser = await readASingleUserDocument("users/"+userUid) as User
+        ourUser.idToken = idToken
+        return {type: SIGNIN, payload: {user: ourUser, registered: true}}
     })
     .catch( (error) => {
         const errorCode = error.code
         const errorMessage = error.message
         console.log("errorCode:",errorCode);
         console.log("errorMessage:",errorMessage);
+        return {type: ERROR}
     })
-    return {type:SIGNIN , payload: {registered: true}} //TODO:FIKS
+    return {type: SIGNIN, payload: {user: ourUser, registered: true}} //TODO:FIKS
 }
 
+
+
+
+
+
+/*
 export const signIn = (email: string, password: string) => {
     
     const url = "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key="+KEY;
@@ -155,7 +165,6 @@ export const signIn = (email: string, password: string) => {
     };
  };
 
-
 export const signUp = (email : string, password : string) => {
 
     const url = "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key="+KEY
@@ -188,3 +197,4 @@ export const signUp = (email : string, password : string) => {
        }
    };
 };
+*/

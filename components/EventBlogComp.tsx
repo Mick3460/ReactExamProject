@@ -9,8 +9,7 @@ new EventBlogItem("0","TestTitle0", "25/05 * 15:00 - 18:00", "Yo mama's house", 
 new EventBlogItem("1","TestTitle1", "25/05 * 15:00 - 18:00", "Yo mama's house", "Helloge", ""), 
 new EventBlogItem("2","TestTitle2", "25/05 * 15:00 - 18:00", "Yo mama's house", "Helloge", ""), 
 new EventBlogItem("3","TestTitle3", "25/05 * 15:00 - 18:00", "Yo mama's house", "Helloge", ""), 
- new EventBlogItem("4","TestTitle4", "01/06 * 12:00 - 19:00", "KBH Ø",
-"There is simply not enough time or space to write a proper message in this little space. One would imagine this is how a hen feels in a cage.", "")] // Pull from database which would be firebase
+ new EventBlogItem("4","TestTitle4", "01/06 * 12:00 - 19:00", "KBH Ø","Helloge", "")] // Pull from database which would be firebase
 
 // 
 function defaultImage(img: string) {

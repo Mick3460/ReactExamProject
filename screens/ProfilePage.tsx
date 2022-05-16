@@ -14,11 +14,17 @@ const userInfo: UserInfo = {
     userEducationalCredentials: "PhD in Deez ",
 }
 
-export default function ProfilePage() {
+interface Props {
+    navigation: any
+}
+
+
+
+export const ProfilePage: React.FC<Props> = ({navigation}) => {
     const dispatch = useDispatch()
     return (
         <View>
-            <ProfileInformation userInfo={userInfo} />
+            <ProfileInformation userInfo={userInfo} navigation={navigation}/>
             <Seperator />
             <Button
                 title='LOGOUT'

@@ -13,6 +13,7 @@ import LoggedInLandingPage from "../screens/LoggedInLanding"
 import { updateUser } from '../store/actions/user.actions';
 import ProfilePage from '../screens/ProfilePage';
 import ChatroomsPage from '../screens/ChatroomsPage';
+import EventPage from "../screens/EventPage";
 import {User} from "../entities/User"
 
 let user: any = undefined;
@@ -29,6 +30,20 @@ function LoggedInStackNavigator() {
     </Stack.Navigator>
   );
 }
+
+function EventStackNavigator() {
+  return (
+    <Stack.Navigator initialRouteName="EventBlog">
+      <Stack.Screen name="EventBlog" component={TestPage} options ={{headerShown: false}}>
+      
+      </Stack.Screen>
+      <Stack.Screen name="EventPage" component={EventPage} options = {{headerShown: false}}>
+        
+      </Stack.Screen>
+    </Stack.Navigator>
+  )
+}
+
 function LandingStackNavigator() {
   return (
     <Stack.Navigator>
@@ -68,7 +83,7 @@ export default function NavigationComp () {
             {user !== undefined ? (
             <Tab.Navigator screenOptions={{ headerShown: false }}>
                 <Tab.Screen name="HOMESCREEN" component={LoggedInStackNavigator} />
-                <Tab.Screen name="Test Page" component={TestPage} />
+                <Tab.Screen name="Test Page" component={EventStackNavigator} />
                 <Tab.Screen name="Chat" component={ChatroomsPage} />
                 <Tab.Screen name="Profile" component={ProfilePage}/>
             </Tab.Navigator>

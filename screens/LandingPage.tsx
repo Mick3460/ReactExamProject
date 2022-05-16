@@ -32,7 +32,6 @@ export default function LandingPage() {
         const email = loginText;
         const pw = loginPw;
         dispatch(await signInFirebase(email,pw))
-        //dispatch(signIn(email,pw))
     }
 
 

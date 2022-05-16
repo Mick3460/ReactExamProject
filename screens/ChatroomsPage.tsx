@@ -7,7 +7,6 @@ import { addChatroom, fetchChatroom } from "../store/actions/chat.actions";
 
 export default function ChatroomsPage() {
     
-    //let chatrooms = [new Chatroom("lol","lol",new Date(),"key1"), new Chatroom("lol2","lol2",new Date(),"key2")]
     const dispatch = useDispatch()
     const [message, onChangeMessage] = React.useState('');
     const chatrooms: Chatroom[] = useSelector((state: any) => state.chat.chatrooms)

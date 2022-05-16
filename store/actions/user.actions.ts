@@ -28,12 +28,12 @@ async function addANewUserToFireStore(user: User) {
     try {
         const docRef = doc(db,"users/"+user.uid)
         const newDoc = await setDoc(docRef, { 
-        displayName: user.displayname,
+        displayName: "user.displayname",
         first: "Michael",
         last: "Big papa",
         email: user.email,
         uid: user.uid,
-        photoURL: user.photoUrl,
+        photoURL: "https://i.kym-cdn.com/photos/images/facebook/001/459/556/023.png",
         connectedChatroomIds: [1,2]
       })
     } catch (e){
@@ -42,12 +42,9 @@ async function addANewUserToFireStore(user: User) {
   }
 
   async function readASingleUserDocument(path:string) {
-    console.log("using this path: ",path); 
-    console.log("READING A SINGLE DOCUMENT METHOD");
-    
+
     const docReff = doc(db,path)
     const mySnapshot = await getDoc(docReff)
-   
     
     if (mySnapshot.exists()) {
       const docData = mySnapshot.data();
@@ -57,66 +54,31 @@ async function addANewUserToFireStore(user: User) {
           photoUrl: docData.photoURL, 
           idToken: null, 
           uid: docData.uid, 
-          connectedChatroomIds: docData.connectedChatroomIds} //, 
-      console.log("My user", user);
-      
+          connectedChatroomIds: docData.connectedChatroomIds} //,  
       return user
-      
     }
   }
 
-export const signUpFirebase = (email: string,password: string) => {
+export const signUpFirebase = async (email: string,password: string) => {
     
-    createUserWithEmailAndPassword(auth,email,password)
-    .then( (userCredential) => {
-        
-        const user: any = userCredential.user
-
-        //console.log("signUpFireBase action, user:",user);
-        //console.log("signUpFireBase action, user.email:",user.email); //works userCredential._tokenResponse.idToken
-        //console.log("signUpFireBase action, user.stsTokenManager:",user.stsTokenManager); 
-        //console.log("signUpFireBase action, user.stsTokenManager.accessToken:",user.stsTokenManager.accessToken); //works userCredential._tokenResponse.idToken      
-        
-        if (user.email != null){
+    const response = await createUserWithEmailAndPassword(auth,email,password)
+    const user = response.user
+    if (user.email != null ) {
         const userr = new User(user.email, user.displayName as string ,user.photoURL as string, user.stsTokenManager.accessToken as string, user.uid)
-        //console.log("userr:",userr);
+        console.log("userr:",userr);
         addANewUserToFireStore(userr)
         return {type: SIGNUP}
-        }
-    })
-    .catch( (error) => {
-        const errorCode = error.code
-        const errorMessage = error.message
-        console.log("errorCode:",errorCode);
-        console.log("errorMessage:",errorMessage);
-        
-    })
+    }
 }
 
 export const signInFirebase = async (email:string ,password: string) => {
-    let ourUser : User = {
-        email: email,
-        uid: undefined,
-        connectedChatroomIds: undefined
-    }
-    signInWithEmailAndPassword(auth,email,password)
-    .then( async (userCredential) => {
-        const fetchedUser = userCredential.user
-        const userUid = fetchedUser.uid
-        const idToken = userCredential._tokenResponse.idToken //_token is definitely a thing
-        //check if user is in FireStore 
-        ourUser = await readASingleUserDocument("users/"+userUid) as User
-        ourUser.idToken = idToken
-        return {type: SIGNIN, payload: {user: ourUser, registered: true}}
-    })
-    .catch( (error) => {
-        const errorCode = error.code
-        const errorMessage = error.message
-        console.log("errorCode:",errorCode);
-        console.log("errorMessage:",errorMessage);
-        return {type: ERROR}
-    })
-    return {type: SIGNIN, payload: {user: ourUser, registered: true}} //TODO:FIKS
+  
+    const response = await signInWithEmailAndPassword(auth,email,password)
+    const userUid = response.user.uid
+    const idToken = response._tokenResponse.idToken
+    const fetchUser = await readASingleUserDocument("users/"+userUid) as User
+    fetchUser.idToken = idToken
+    return {type: SIGNIN, payload: {user: fetchUser, registered: true}} //TODO:FIKS
 }
 
 

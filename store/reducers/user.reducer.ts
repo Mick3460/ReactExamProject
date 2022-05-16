@@ -29,8 +29,8 @@ const userReducer = (state: ReduxState = initialState, action: any) => {
         
         case SIGNIN:
             if (action.payload.registered == true){
-            const fetchedUser = action.payload.user
-            return {...state, validUser: true, loggedInUser: fetchedUser}
+            //const fetchedUser = action.payload.user
+            return {...state, validUser: true, loggedInUser: {name: "lol"}}
             
             } else {
                 return state

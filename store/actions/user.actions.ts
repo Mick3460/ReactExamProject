@@ -47,13 +47,22 @@ async function addANewUserToFireStore(user: User) {
     
     const docReff = doc(db,path)
     const mySnapshot = await getDoc(docReff)
-    //console.log(mySnapshot);
+   
     
     if (mySnapshot.exists()) {
-      const docData = mySnapshot.data()
+      const docData = mySnapshot.data();
+      const user: User = {
+          email: docData.email, 
+          displayname: docData.displayName, 
+          photoUrl: docData.photoURL, 
+          idToken: null, 
+          uid: docData.uid, 
+          connectedChatroomIds: docData.connectedChatroomIds} //, 
       console.log(docData);
-      console.log("My data is:", JSON.stringify(docData));
+      console.log("##########", docData.email);
       
+      console.log("My data is:", JSON.stringify(docData));
+      return user
       
     }
   }
@@ -90,11 +99,12 @@ export const signInFirebase = (email:string ,password: string) => {
         
     signInWithEmailAndPassword(auth,email,password)
     .then( async (userCredential) => {
-        const user = userCredential.user
-        const userUid = user.uid
-        //check if user is in FireStore
-        let docRef = doc(db,"users/"+userUid)  
-        readASingleUserDocument("users/"+userUid)
+        const fetchedUser = userCredential.user
+        const userUid = fetchedUser.uid
+        const idToken = userCredential._tokenResponse.idToken
+        //check if user is in FireStore 
+        const test = await readASingleUserDocument("users/"+userUid)
+        //ourUser.idToken = idToken
     })
     .catch( (error) => {
         const errorCode = error.code

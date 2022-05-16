@@ -22,6 +22,8 @@ export const queryChatroom = async () => {
     let testId;
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc) => {
+        testId=doc.id
+        arrayOfId.push(doc.id)
       // doc.data() is never undefined for query doc snapshots
       console.log(doc.id, " => ", doc.data());
     });
@@ -34,7 +36,6 @@ export const queryChatroom = async () => {
 
     docs.forEach( (doc) => {
         console.log(doc.id, " => ",doc.data());
-        
     })  
 }
 

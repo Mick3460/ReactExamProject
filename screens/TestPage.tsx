@@ -14,7 +14,7 @@ const blogArray = [
     new EventBlogItem("0","TestTitle0", "25/05 * 15:00 - 18:00", "Yo mama's house", "Helloge", ""), 
     new EventBlogItem("1","TestTitle1", "25/05 * 15:00 - 18:00", "Yo mama's house", "Helloge", ""), 
     new EventBlogItem("2","TestTitle2", "25/05 * 15:00 - 18:00", "Yo mama's house", "Helloge", ""), 
-    new EventBlogItem("3","TestTitle3", "25/05 * 15:00 - 18:00", "Yo mama's house", "Helloge", ""), 
+    new EventBlogItem("3","TestTitle3", "25/05 * 15:00 - 18:00", "Yo mama's house", "Pass her around like a bong yo", ""), 
     new EventBlogItem("4","TestTitle4", "01/06 * 12:00 - 19:00", "KBH Ø","Helloge", "")
     ] // Pull from database which would be firebase
     

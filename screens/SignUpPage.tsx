@@ -5,7 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { StackParamList } from '../typings/navigations';
 import LandingPage from "./LandingPage"
-import { signUp,signUpFirebase } from '../store/actions/user.actions';
+import { signUpFirebase } from '../store/actions/user.actions';
 
 
 export default function SignUpPage() {

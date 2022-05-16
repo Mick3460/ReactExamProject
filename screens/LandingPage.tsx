@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Button, StyleSheet, Text, TextInput, View, Image, TouchableOpacity } from 'react-native';
 import { User } from '../entities/User';
 import { useDispatch, useSelector } from 'react-redux';
-import { signIn, signInFirebase, } from '../store/actions/user.actions';
+import { signInFirebase, } from '../store/actions/user.actions';
 //import { logOut } from '../store/actions/chat.actions';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
@@ -31,7 +31,7 @@ export default function LandingPage() {
     async function handleSignIn () {
         const email = loginText;
         const pw = loginPw;
-        dispatch(signInFirebase(email,pw))
+        dispatch(await signInFirebase(email,pw))
         //dispatch(signIn(email,pw))
     }
 

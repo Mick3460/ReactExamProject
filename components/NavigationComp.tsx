@@ -91,7 +91,7 @@ export default function NavigationComp () {
                 ) : (
 
             <Tab.Navigator screenOptions={{ headerShown: false }}>
-                <Tab.Screen name="Landing Page" component={LandingStackNavigator} />
+                <Tab.Screen name="Landing Page" component={LandingPage} />
                 <Tab.Screen name="SignUp Page" component={SignUpPage} />
             </Tab.Navigator>
             )}

@@ -9,6 +9,36 @@ export const FETCHCHAT = 'FETCHCHAT';
 //TODO: FIKS DEN HER URL
 export const chatRoomURL = "https://reactexamproject-default-rtdb.europe-west1.firebasedatabase.app/chatrooms.json=auth=";
 
+// Create a reference to the cities collection
+import { collection, doc, getDocs, query, where } from "firebase/firestore";
+import { db } from "../../App";
+
+export const queryChatroom = async () => {
+    const chatroomRef = collection(db, "chatrooms");
+    
+    // Create a query against the collection.
+    const q = query(chatroomRef, where("chatroomId", "==", "1"));
+    let arrayOfId= []
+    let testId;
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+      // doc.data() is never undefined for query doc snapshots
+      console.log(doc.id, " => ", doc.data());
+    });
+
+    console.log("TÆST");
+    //TODO: HENT BEDRE LOL
+    const chatroomReff = collection(db,"chatrooms/"+testId+"/messages")
+    const docs = await getDocs(chatroomReff)
+    console.log("````");
+
+    docs.forEach( (doc) => {
+        console.log(doc.id, " => ",doc.data());
+        
+    })  
+}
+
+
 export const addChatroom = (chatroom: Chatroom, user: User) => {
     // indsæt getState: any i dispatchen for at få den næste kommentar til at være valid (?)
      return async (dispatch: (arg0: { type: string; payload: any;}) => void) => {

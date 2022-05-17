@@ -6,28 +6,30 @@ import { updateEmail, updateProfile, User as AuthUser } from 'firebase/auth'
 import { doc, setDoc } from 'firebase/firestore'
 import { User } from '../entities/User'
 
-const docRef = doc(db, `users/${auth.currentUser?.uid}`)
 
 const handleUpdateUserInfo = (displayName: string, first:string, last: string, email: string, description: string) => {
-//    console.log("Save Changes", displayName, email, description)
-//
-//    //new email
-//    if (auth.currentUser?.email !== email) {
-//        updateEmail(auth.currentUser as AuthUser, email)
-//    }
-//    //new displayName
-//    if (auth.currentUser?.displayName !== displayName) {
-//        updateProfile(auth.currentUser as AuthUser, {displayName: displayName})
-//    }
-//
-//    //update userinformation in db
-//    setDoc(docRef, {
-//        displayName,
-//        first,
-//        last,
-//        email,
-//        description,
-//    }, {merge: true})
+    const docRef = doc(db, "users/" + auth.currentUser?.uid)
+
+    //new email
+    if (auth.currentUser?.email !== email) {
+        updateEmail(auth.currentUser as AuthUser, email)
+    }
+    //new displayName
+    if (auth.currentUser?.displayName !== displayName) {
+        updateProfile(auth.currentUser as AuthUser, {displayName: displayName})
+    }
+
+    //update userinformation in db
+    setDoc(docRef, {
+        displayName,
+        first,
+        last,
+        email,
+        description,
+    }, {merge: true})
+    .then(() => {
+        //TODO: add dispatch so the user store get updated with new values locally
+    })
 }
 
 

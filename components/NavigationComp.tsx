@@ -53,8 +53,8 @@ function LandingStackNavigator() {
 function ProfileStackNavigator(){
   return (
     <Stack.Navigator initialRouteName='ProfilePage'>
-      <Stack.Screen name="Profile" component={ProfilePage}/>
-      <Stack.Screen name="Edit Profile" component={ProfileEditPage}/>
+      <Stack.Screen name='ProfilePage' component={ProfilePage} />
+      <Stack.Screen name="ProfileEditPage" component={ProfileEditPage}/>
     </Stack.Navigator>
   )
 }

@@ -3,15 +3,16 @@ import React from 'react'
 import { UserInfo } from '../entities/UserInfo'
 import NavigationComp from './NavigationComp'
 import { useNavigation } from "@react-navigation/native" 
+import { User } from '../entities/User'
 
 
 interface Props {
-    userInfo: UserInfo
+    user: User
     navigation: any
 }
 
 
-export const ProfileInformation: React.FC<Props> = ({userInfo, navigation}) => {
+export const ProfileInformation: React.FC<Props> = ({user, navigation}) => {
     return (
         <View style={{ marginTop: 40, height: Dimensions.get('window').height / 4 }}>
             <View
@@ -22,16 +23,16 @@ export const ProfileInformation: React.FC<Props> = ({userInfo, navigation}) => {
                 >
                     <Image
                         style={styles.profilePicture}
-                        source={{ uri: userInfo.userAvatarUrl }}
+                        source={{ uri: user.photoUrl as string }}
                     />
                 </View>
                 <View
                     style={styles.userInformationSection}
                 >
-                    <Text style={styles.userFullName}>{userInfo.userFullName}</Text>
+                    <Text style={styles.userFullName}>{`${user.first} ${user.last}`}</Text>
                     <View>
-                        <Text style={styles.userInfoText}>{userInfo.userEmail}</Text>
-                        <Text style={styles.userInfoText}>{userInfo.userEducationalCredentials}</Text>
+                        <Text style={styles.userInfoText}>{user.email}</Text>
+                        <Text style={styles.userInfoText}>{user.description}</Text>
                     </View>
                 </View>
             </View>
@@ -39,7 +40,7 @@ export const ProfileInformation: React.FC<Props> = ({userInfo, navigation}) => {
                 style={styles.editProfileSection}
             >
                 <Button
-                    onPress={() => navigation.navigate("Edit Profile")}
+                    onPress={() => navigation.navigate("ProfileEditPage")}
                     title='EDIT PROFILE'
                     color={'#5050A5'}
                 />

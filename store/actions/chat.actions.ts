@@ -3,7 +3,7 @@ import { User } from "../../entities/User";
 
 
 export const ADD_CHATROOM = 'ADD_CHATROOM';
-export const FETCHCHAT = 'FETCHCHAT';
+export const FETCH_CHATROOMS = 'FETCH_CHATROOMS';
 
 
 //TODO: FIKS DEN HER URL
@@ -12,32 +12,72 @@ export const chatRoomURL = "https://reactexamproject-default-rtdb.europe-west1.f
 // Create a reference to the cities collection
 import { collection, doc, getDocs, query, where } from "firebase/firestore";
 import { db } from "../../App";
+import { Message } from "../../entities/Message";
+import { ChatroomObj } from "../../entities/ChatroomObj";
 
-export const queryChatroom = async () => {
+
+export const queryChatroomWhere = async (id:number) => {
     const chatroomRef = collection(db, "chatrooms");
-    
-    // Create a query against the collection.
-    const q = query(chatroomRef, where("chatroomId", "==", "1"));
-    let arrayOfId= []
-    let testId;
+    const q = query(chatroomRef, where("chatroomId", "==", id.toString())) //must be a string :rage:
     const querySnapshot = await getDocs(q);
+    let docId: string = "";
     querySnapshot.forEach((doc) => {
-        testId=doc.id
-        arrayOfId.push(doc.id)
+        docId = doc.id
       // doc.data() is never undefined for query doc snapshots
-      console.log(doc.id, " => ", doc.data());
     });
+    return docId;
+}
 
-    console.log("TÆST");
+export const queryChatrooms = async (user: User) => {
+    let chatroomIds = user.connectedChatroomIds
+    let fetchedIds: string[] = []
+    
+    //fetch all chatroom ids
+    for(let i=0; i<chatroomIds!.length; i++){
+        fetchedIds.push(await queryChatroomWhere(chatroomIds![i]))
+    }
+
+    //fetch the messages within every chatroom id
+    console.log("############\n\n",fetchedIds);
+    let chatroomss: any[] = []
+    for (let j = 0; j < fetchedIds.length; j++){
+        let chatroomObject = new ChatroomObj(fetchedIds[j],[] as Message[] )
+        const chatroomReff = collection(db,"chatrooms/"+fetchedIds[j]+"/messages")
+        const q = query(chatroomReff) //must be a string :rage:
+        const querySnapshot = await getDocs(q);
+        
+        querySnapshot.forEach((doc) => {    
+            let msg = new Message(doc.data().message, fetchedIds[j])  
+            chatroomObject.messages?.push(msg)
+            // doc.data() is never undefined for query doc snapshots
+        });
+        chatroomss.push(chatroomObject)
+    }
+    console.log("\n \n this is all the chatrooms objects:", chatroomss);
+    return {type: FETCH_CHATROOMS, payload: chatroomss}
+}
+
+/*
     //TODO: HENT BEDRE LOL
-    const chatroomReff = collection(db,"chatrooms/"+testId+"/messages")
+    let removeMe = "E5TP4rKxHaYM6xQNrGlg"
+    const chatroomReff = collection(db,"chatrooms/"+removeMe+"/messages")
     const docs = await getDocs(chatroomReff)
     console.log("````");
 
     docs.forEach( (doc) => {
         console.log(doc.id, " => ",doc.data());
     })  
-}
+*/
+/*
+    
+    const chatroomRef = collection(db, "chatrooms");
+    const q = query(chatroomRef, where("chatroomId", "==", "1"))
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach( (doc) => {
+        console.log(doc.id, "LLALAALAL%&%&%&%&");
+        testId = doc.id
+    })
+*/
 
 
 export const addChatroom = (chatroom: Chatroom, user: User) => {
@@ -76,6 +116,7 @@ export const addChatroom = (chatroom: Chatroom, user: User) => {
 };
 
 
+/*
 export const fetchChatroom = (user: User) => {
 
     return async (dispatch: (arg0: { type: string; payload: any;}) => void) => {
@@ -109,4 +150,5 @@ export const fetchChatroom = (user: User) => {
         }
     };
 }
+*/
 

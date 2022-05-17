@@ -41,14 +41,6 @@ function EventStackNavigator() {
   )
 }
 
-function LandingStackNavigator() {
-  return (
-    <Stack.Navigator>
-      <Stack.Screen name="LandingPage" component={LandingPage} options={{ headerShown: false }}/>
-      <Stack.Screen name="SignUpPage" component={SignUpPage} options={{ headerShown: false }}/>
-    </Stack.Navigator>
-  )
-}
 
 function ProfileStackNavigator(){
   return (
@@ -98,7 +90,7 @@ export default function NavigationComp () {
 
             <Tab.Navigator screenOptions={{ headerShown: false }}>
                 <Tab.Screen name="Landing Page" component={LandingPage} />
-                <Tab.Screen name="SignUp Page" component={SignUpPage} />
+                <Tab.Screen name="SignUpPage" component={SignUpPage} />
             </Tab.Navigator>
             )}
         </NavigationContainer>

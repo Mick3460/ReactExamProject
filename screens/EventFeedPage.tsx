@@ -12,7 +12,7 @@ import { EventBlogItem } from '../entities/EventBlogItem'
 import { useDispatch, useSelector } from "react-redux";
 import {queryEvent} from '../store/actions/event.actions'
 
-export default function TestPage({navigation}) {
+export default function EventFeedPage({navigation}) {
     const firebaseArray: EventBlogItem[] = useSelector((state: any) => state.event.events) // It pushes the data as an array into the firebaseArray, bruh
     const dispatch = useDispatch()
     async function handleFetchEvent() {

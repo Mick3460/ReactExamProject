@@ -8,7 +8,7 @@ import { NavigationContainer, StackActions, useNavigation } from '@react-navigat
 import * as SecureStore from 'expo-secure-store'
 import LandingPage from "../screens/LandingPage";
 import SignUpPage from "../screens/SignUpPage";
-import TestPage from "../screens/TestPage";
+import TestPage from "../screens/EventFeedPage";
 import LoggedInLandingPage from "../screens/LoggedInLanding"
 import { updateUser } from '../store/actions/user.actions';
 import {ProfilePage} from '../screens/ProfilePage';
@@ -18,6 +18,7 @@ import {ProfileEditPage} from "../screens/ProfileEditPage"
 import EventPage from "../screens/EventPage";
 import {User} from "../entities/User"
 import LoggedInLanding from '../screens/LoggedInLanding';
+import EventFeedPage from '../screens/EventFeedPage';
 
 let user: any = undefined;
 
@@ -28,7 +29,7 @@ function LoggedInStackNavigator() {
   return (
     <Stack.Navigator>
       <Stack.Screen name="LoggedInLandingPage" component={LoggedInLandingPage} options={{ headerShown: false }}/>
-      <Stack.Screen name="TestPage" component={TestPage} options={{ headerShown: false }}/>
+      <Stack.Screen name="EventFeedPage" component={EventFeedPage} options={{ headerShown: false }}/>
       <Stack.Screen name="ChatroomsPage" component={ChatroomsPage} options={{ headerShown: false }}/>
     </Stack.Navigator>
   );
@@ -36,8 +37,8 @@ function LoggedInStackNavigator() {
 
 function EventStackNavigator() {
   return (
-    <Stack.Navigator initialRouteName="EventBlog">
-      <Stack.Screen name="EventBlog" component={TestPage} options ={{headerShown: false}}/>
+    <Stack.Navigator initialRouteName="EventFeedPage">
+      <Stack.Screen name="EventFeedPage" component={EventFeedPage} options ={{headerShown: false}}/>
       <Stack.Screen name="EventPage" component={EventPage} options = {{headerShown: false}}/>
     </Stack.Navigator>
   )

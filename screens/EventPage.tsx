@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image} from 'react-native';
-import {defaultImage} from './TestPage'
+import {defaultImage} from './EventFeedPage'
 
 const icons = [require('../assets/location.png'), require('../assets/calendar.png')]
 

@@ -29,15 +29,9 @@ const userReducer = (state: ReduxState = initialState, action: any) => {
         
         case SIGNIN:
             if (action.payload.registered == true){
-            //const fetchedUser = action.payload.user
-            console.log("REDUCER REACHED");
             const user: User = action.payload.user
-            console.log(user);
-            console.log("lol");
-            
-            
             return {...state, validUser: true, loggedInUser: action.payload.user}
-            
+        
             } else {
                 return state
             }

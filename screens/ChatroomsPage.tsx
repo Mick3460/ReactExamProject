@@ -2,7 +2,7 @@ import React, {useEffect} from "react"
 import { View, Text, FlatList, TextInput, TouchableOpacity, StyleSheet } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import {Chatroom} from "../entities/Chatroom";
-import { addChatroom, fetchChatroom, queryChatroom } from "../store/actions/chat.actions";
+import { addChatroom,  queryChatrooms } from "../store/actions/chat.actions";
 
 
 export default function ChatroomsPage() {
@@ -13,8 +13,8 @@ export default function ChatroomsPage() {
     const user = useSelector( (state:any) => state.user.loggedInUser )
     let toggleClass = false; //MAKE SOMETHING DIFFERENT THAN THIS LOL
     
-    function handleFetchChatroom() {
-        dispatch(queryChatroom)
+    async function handleFetchChatroom() {
+        dispatch(await queryChatrooms(user))
     }
 
     useEffect(() => { 

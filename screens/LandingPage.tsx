@@ -12,7 +12,7 @@ import SignUpPage from "./SignUpPage"
 
 type ScreenNavigationType = NativeStackNavigationProp<
     StackParamList,
-    "SignUp Page"
+    "SignUpPage"
 >
 
 export default function LandingPage() {
@@ -43,7 +43,7 @@ export default function LandingPage() {
             <Text style={styles.hugeText}>Landing Page</Text>
             <Text>Is Michael happy? ..no  </Text>    
             <Text>Not a user yet? Sign up and gives us all your data!</Text>  
-            <Button title="Sign up" onPress={() => navigation.navigate("SignUp Page" )} />
+            <Button title="Sign up" onPress={() => navigation.navigate("SignUpPage" )} />
 
         <Text>Log in using social networks</Text>
 

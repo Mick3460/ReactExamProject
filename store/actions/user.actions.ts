@@ -38,7 +38,8 @@ async function addANewUserToFireStore(user: User) {
         email: user.email,
         uid: user.uid,
         photoURL: "https://i.kym-cdn.com/photos/images/facebook/001/459/556/023.png",
-        connectedChatroomIds: [1,2]
+        connectedChatroomIds: [1,2],
+        description: user.description
       })
     } catch (e){
       console.log(e)
@@ -58,7 +59,11 @@ async function addANewUserToFireStore(user: User) {
           photoUrl: docData.photoURL, 
           idToken: null, 
           uid: docData.uid, 
-          connectedChatroomIds: docData.connectedChatroomIds} //,  
+          connectedChatroomIds: docData.connectedChatroomIds,
+          first: docData.first,
+          last: docData.last,
+          description: docData.description,
+        } //,  
       return user
     }
   }
@@ -82,6 +87,7 @@ export const signInFirebase = async (email:string ,password: string) => {
     const idToken = response._tokenResponse.idToken
     const fetchUser = await readASingleUserDocument("users/"+userUid) as User
     fetchUser.idToken = idToken
+    console.log("fetchuser: ",fetchUser)
     return {type: SIGNIN, payload: {user: fetchUser, registered: true}} //TODO:FIKS
 }
 

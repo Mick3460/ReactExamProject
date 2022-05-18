@@ -1,12 +1,12 @@
 import React from 'react';
-import { Button, StyleSheet, Text, View } from 'react-native';
+import { Button, StyleSheet, Text, View, ImageBackground } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { logOut } from '../store/actions/user.actions';
-
 
 export default function LoggedInLanding() {
 
     const dispatch = useDispatch()
+    const img = require('../assets/homescreenBackground.png')
     
     function handleLogOut(){
         dispatch(logOut()) // user-clearing method
@@ -15,8 +15,7 @@ export default function LoggedInLanding() {
 
     return (
         <View style={styles.container}>
-            <Text>FORSIDE FOR BRUGERE SOM ER LOGGET IND</Text>
-            <Button onPress={handleLogOut} title="log out"></Button>
+            <ImageBackground source={img} style={styles.imgbackground}/>
         </View>
     );
 }
@@ -24,8 +23,9 @@ export default function LoggedInLanding() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
+    },
+    imgbackground: {
+        width: "100%",
+        height: "100%",
     },
 })  

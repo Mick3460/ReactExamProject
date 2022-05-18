@@ -18,6 +18,8 @@ import {ProfileEditPage} from "../screens/ProfileEditPage"
 import EventPage from "../screens/EventPage";
 import {User} from "../entities/User"
 import LoggedInLanding from '../screens/LoggedInLanding';
+import {StyleSheet, Text} from 'react-native'
+import Icon from 'react-native-vector-icons/AntDesign';
 
 let user: any = undefined;
 
@@ -32,6 +34,15 @@ function LoggedInStackNavigator() {
       <Stack.Screen name="ChatroomsPage" component={ChatroomsPage} options={{ headerShown: false }}/>
     </Stack.Navigator>
   );
+}
+
+function LandingPageStackNavigator() {
+  return (
+  <Stack.Navigator initialRouteName='LandingPage'>
+    <Stack.Screen name="LandingPage" component={LandingPage} options={{headerShown: false}}/>
+    <Stack.Screen name="SignUpPage" component={SignUpPage} options={{headerShown: false}}/>
+  </Stack.Navigator>
+  )
 }
 
 function EventStackNavigator() {
@@ -89,22 +100,41 @@ export default function NavigationComp () {
   
   return (
     <NavigationContainer>
+      
             {user !== undefined ? (
-            <Tab.Navigator screenOptions={{ headerShown: false }}>
-                <Tab.Screen name="HOMESCREEN" component={LoggedInLanding} />
-                <Tab.Screen name="Test Page" component={EventStackNavigator} />
-                <Tab.Screen name="Chat" component={ChatroomStackNavigator} />
-                <Tab.Screen name="Profile" component={ProfileStackNavigator}/>
+            <Tab.Navigator screenOptions={{ headerShown: false }} >
+                <Tab.Screen name="Home" component={LoggedInLanding} options={{tabBarIcon: ({  }) => (
+                  <Icon name="home" size={30} color="#0000FF"/>
+                )}}/>
+                <Tab.Screen name="Events" component={EventStackNavigator} options={{tabBarIcon: ({  }) => (
+                  <Icon name="calendar" size={30} color="#0000FF"/>
+                )}}/>
+                <Tab.Screen name="Chat" component={ChatroomStackNavigator} options={{tabBarIcon: ({  }) => (
+                  <Icon name="message1" size={30} color="#0000FF"/>
+                )}}/>
+                <Tab.Screen name="Profile" component={ProfileStackNavigator} options={{tabBarIcon: ({  }) => (
+                  <Icon name="user" size={30} color="#0000FF"/>
+                )}}/>
             </Tab.Navigator>
 
                 ) : (
 
             <Tab.Navigator screenOptions={{ headerShown: false }}>
-                <Tab.Screen name="Landing Page" component={LandingPage} />
+                <Tab.Screen name="Landing Page" component={LandingPageStackNavigator} />
                 <Tab.Screen name="SignUpPage" component={SignUpPage} />
             </Tab.Navigator>
             )}
         </NavigationContainer>
     )
   }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+      margin: 100,
+      height: 100,
+      width: 100
+  },
+})  
+
   

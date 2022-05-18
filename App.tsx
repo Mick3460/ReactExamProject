@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, LogBox} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Provider, useDispatch, useSelector } from 'react-redux';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
@@ -10,7 +10,7 @@ import chatReducer from './store/reducers/chat.reducer';
 import userReducer from './store/reducers/user.reducer';
 import eventReducer from './store/reducers/event.reducer';
 import { useNavigation } from '@react-navigation/native';
-import { LogBox } from 'react-native';
+//import { LogBox } from 'react-native';
 
 LogBox.ignoreLogs(['Require cycle:', 'Setting a timer']);
 //LogBox.ignoreLogs(['Warning: Async Storage has been extracted from react-native core']);

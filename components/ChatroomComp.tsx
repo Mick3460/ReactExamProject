@@ -7,12 +7,12 @@ import { Message } from '../entities/Message';
 //Chatroom objects har id og Messages
 export default function ChatroomComp ({chatroom} : {chatroom: Chatroom}){ //chatroom: Chatroom
     let lastMsgIndex = chatroom.messages?.length as number
-    let lastMsg = chatroom.messages?.[0].message
+    //let lastMsg = chatroom.messages?.[0].message
 
     return (
         <View style={styles.container}>
-            <Text>lol:{lastMsgIndex}</Text>
-            <Text>lol:{lastMsg}</Text>
+            <Text>lol: {lastMsgIndex}</Text>
+            <Text>lol: last msg</Text>
         </View>
     )
 }

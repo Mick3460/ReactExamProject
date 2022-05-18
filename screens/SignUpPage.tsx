@@ -22,7 +22,7 @@ export default function SignUpPage() {
         const pw = passwordStr;
         signUpFirebase(email,pw)
         //dispatch(signUp(email,pw));
-        navigation.navigate("LandingPage")
+        //navigation.navigate("LandingPage") //TODO: UNCOMMENT THIS WHEN JIM PUSHES
     }
     return (
         <View style={styles.container}>

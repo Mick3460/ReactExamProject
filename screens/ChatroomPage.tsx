@@ -4,19 +4,19 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { Chatroom } from "../entities/Chatroom";
 import { Message } from "../entities/Message";
-import { queryChatrooms } from "../store/actions/chat.actions";
+import { addMessage, queryChatrooms } from "../store/actions/chat.actions";
 
 
 export default function ChatroomsPage({route}) {
     
     const dispatch = useDispatch()
-    const [message, onChangeMessage] = React.useState('');
+    const [messageInput, onChangeMessage] = React.useState('');
     const user = useSelector( (state:any) => state.user.loggedInUser )
-
+    const chatrooms: Chatroom[] = useSelector((state: any) => state.chat.chatrooms)
+    
     let item = route.params.item
+    const chatroomId = item.id
     let msgArray = item.messages
-    console.log("YAYET\n\n");
-    console.log(item)
 
     async function handleFetchChatroom() {
         dispatch(await queryChatrooms(user))
@@ -28,17 +28,19 @@ export default function ChatroomsPage({route}) {
     //handleFetchChatroom()
 
     }, [] );
+    */
    useEffect(() => {
    if (chatrooms) {
-   console.log("Update chatrooms useEffect() ")
+    console.log("Update chatrooms useEffect() ")
    }
    }, [chatrooms]); // The second parameters are the variables this useEffect is listening to for changes.
-*/
 
-   const handleAddChatroom = () => {
-    //const chatroom: Chatroom = new Chatroom(message.substring(0,12), message, new Date());
-    //dispatch(addChatroom(chatroom,user));
-   }
+   const handleAddMessage = async () => {
+        const msg: Message = new Message(messageInput,user.uid);
+        msgArray.push(msg)   
+        dispatch( await addMessage(msg,chatroomId));
+        onChangeMessage('')
+    }
 
 
    const renderChatroom = ({ item } : { item: Message }) => (
@@ -68,11 +70,11 @@ export default function ChatroomsPage({route}) {
         <TextInput
             style={{width:300, borderWidth:2, borderColor: 'green',   }}
             onChangeText={onChangeMessage}
-            value={message}
+            value={messageInput}
             placeholder="Enter message..."
         />
         
-        <TouchableOpacity onPress={handleAddChatroom} style={styles.appButtonContainerLeft}>
+        <TouchableOpacity onPress={handleAddMessage} style={styles.appButtonContainerLeft}>
             <Text style={styles.appButtonTextLeft}>Send message</Text>
         </TouchableOpacity>
     </View>

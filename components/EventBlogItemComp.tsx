@@ -12,11 +12,9 @@ function trimDetail(detail: string) {
     return detail
 }
 
-
 export const EventBlogItemComp = ({title, img, date, location, detail}: {title: string, img: ImageSourcePropType, date: string, location: string, detail: string}) => {
     return (
     <SafeAreaView  style={styles.container}>
-        {/* <TouchableOpacity onPress={() => console.log("Event: ", title)}> */}
         <ImageBackground source={img} style={styles.innerBox} imageStyle={{ borderRadius: 10}}>
             <LinearGradient colors={['#00000000', '#000000']} style={styles.gradient}>
                 <Text style={styles.eventTitle}>{title}</Text>
@@ -24,7 +22,6 @@ export const EventBlogItemComp = ({title, img, date, location, detail}: {title: 
                 <Text style={styles.eventText}>{location}</Text>
             </LinearGradient>
         </ImageBackground>
-        {/* </TouchableOpacity> */}
     </SafeAreaView>
     )
     }

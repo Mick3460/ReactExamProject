@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from "react"
 import { StyleSheet, Text, View, SafeAreaView, ScrollView } from 'react-native';
 import EventBlogComp from '../components/EventBlogComp';
 import { useNavigation } from '@react-navigation/native';
@@ -9,27 +9,35 @@ import { StackParamList } from "../typings/navigations";
 import {FlatList, TouchableOpacity } from 'react-native'
 import {EventBlogItemComp} from '../components/EventBlogItemComp'
 import { EventBlogItem } from '../entities/EventBlogItem'
-
-const blogArray = [
-    new EventBlogItem("0","TestTitle0", "25/05 * 15:00 - 18:00", "Yo mama's house", "Helloge", ""), 
-    new EventBlogItem("1","TestTitle1", "25/05 * 15:00 - 18:00", "Yo mama's house", "Helloge", ""), 
-    new EventBlogItem("2","TestTitle2", "25/05 * 15:00 - 18:00", "Yo mama's house", "Helloge", ""), 
-    new EventBlogItem("3","TestTitle3", "25/05 * 15:00 - 18:00", "Yo mama's house", "Pass her around like a bong yo", ""), 
-    new EventBlogItem("4","TestTitle4", "01/06 * 12:00 - 19:00", "KBH Ø","Helloge", "")
-    ] // Pull from database which would be firebase
-    
-type ScreenNavigationType = NativeStackNavigationProp<
-    StackParamList,
-    "TestPage" // the available pages? Or the return stack?
->
+import { useDispatch, useSelector } from "react-redux";
+import {queryEvent} from '../store/actions/event.actions'
 
 export default function TestPage({navigation}) {
+    const firebaseArray: EventBlogItem[] = useSelector((state: any) => state.event.events) // It pushes the data as an array into the firebaseArray, bruh
+    const dispatch = useDispatch()
+    async function handleFetchEvent() {
+        dispatch(await queryEvent())
+    }
+    useEffect(() => { 
+        handleFetchEvent()
+        console.log("at launch")
+        }, [] );
 
     const renderItem = ({item}: {item: EventBlogItem}) => {
-        const sourceimage = defaultImage(item.img) // loool doesn't matter
+        // Deal with dates in here
+
+
+        const sourceimage = defaultImage(item.img)
+        console.log(item)
         return (
             <TouchableOpacity onPress={() => navigation.navigate("EventPage", {item})}>
-                <EventBlogItemComp title={item.title} img={sourceimage} date={item.date} location={item.location} detail={item.detail}></EventBlogItemComp>
+                <EventBlogItemComp 
+                    title={item.title} 
+                    img={sourceimage} 
+                    date={item.formatDateToFeedString()} 
+                    location={item.location} 
+                    detail={item.detail}
+                    />
             </TouchableOpacity>
         )
     }
@@ -41,7 +49,7 @@ export default function TestPage({navigation}) {
             </View>
             <SafeAreaView style={styles.container}>
                 <FlatList // FlatList is scrollable
-                    data= {blogArray}
+                    data= {firebaseArray}
                     renderItem={renderItem}
                     style={styles.scrollable}>
                 </FlatList>

@@ -8,6 +8,7 @@ import ReduxThunk from 'redux-thunk'
 import NavigationComp from './components/NavigationComp';
 import chatReducer from './store/reducers/chat.reducer';
 import userReducer from './store/reducers/user.reducer';
+import eventReducer from './store/reducers/event.reducer';
 import { useNavigation } from '@react-navigation/native';
 
 
@@ -114,6 +115,7 @@ async function queryForDocuments() {
 const rootReducer = combineReducers({
   user: userReducer,
   chat: chatReducer,
+  event: eventReducer,
 })
 
 

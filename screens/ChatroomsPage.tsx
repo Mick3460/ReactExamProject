@@ -73,7 +73,6 @@ const styles = StyleSheet.create({
         color: 'rgb(30, 120, 190)'
     },
     container: {
-        backgroundColor: 'red',
         marginTop: 0,
         alignItems: 'center',
     },

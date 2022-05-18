@@ -12,7 +12,7 @@ import TestPage from "../screens/TestPage";
 import LoggedInLandingPage from "../screens/LoggedInLanding"
 import { updateUser } from '../store/actions/user.actions';
 import {ProfilePage} from '../screens/ProfilePage';
-import ChatroomsPage from '../screens/ChatroomsPage';
+import ChatroomsPage from '../screens/ChatroomPage';
 import {ProfileEditPage} from "../screens/ProfileEditPage"
 import EventPage from "../screens/EventPage";
 import {User} from "../entities/User"

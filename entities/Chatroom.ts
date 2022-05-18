@@ -1,6 +1,6 @@
 import { Message } from "./Message"
 
-export class ChatroomObj {
+export class Chatroom {
 
     constructor(public id: string, public messages?: Message[]){
         this.id = id

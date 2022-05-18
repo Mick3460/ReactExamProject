@@ -1,3 +1,4 @@
+
 import { Chatroom } from "../../entities/Chatroom"
 import { ADD_CHATROOM, FETCH_CHATROOMS } from "../actions/chat.actions"
 
@@ -18,17 +19,19 @@ const initialState: ReduxState = {
 
 interface ReduxAction {
     type: string,
-    payload?: boolean | number | string | Chatroom
+    payload?: boolean | number | string 
 }
 
 const chatReducer = (state: ReduxState = initialState, action: ReduxAction) => {
     switch (action.type) {
         case ADD_CHATROOM:
             console.log("chatReducer, ADD_CHATROOM reached");
-            return {...state, chatrooms: [...state.chatrooms, action.payload] as Chatroom[]}
+            return {...state, chatrooms: [...state.chatrooms, action.payload]}
         case FETCH_CHATROOMS:
             console.log("\n chatReducer, FETCH CHATROOM reached");
-            //return {...state, chatrooms: [...state.chatrooms, action.payload] as Chatroom[]}
+            console.log("action.payload", action.payload);
+            
+            return {...state, chatrooms: action.payload}
             return state    
 
         default:

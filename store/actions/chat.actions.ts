@@ -1,19 +1,17 @@
-import { Chatroom } from "../../entities/Chatroom";
+
 import { User } from "../../entities/User";
+import { Message } from "../../entities/Message";
+import { Chatroom } from "../../entities/Chatroom";
 
 
 export const ADD_CHATROOM = 'ADD_CHATROOM';
 export const FETCH_CHATROOMS = 'FETCH_CHATROOMS';
 
 
-//TODO: FIKS DEN HER URL
-export const chatRoomURL = "https://reactexamproject-default-rtdb.europe-west1.firebasedatabase.app/chatrooms.json=auth=";
 
 // Create a reference to the cities collection
 import { collection, doc, getDocs, query, where } from "firebase/firestore";
 import { db } from "../../App";
-import { Message } from "../../entities/Message";
-import { ChatroomObj } from "../../entities/ChatroomObj";
 
 
 export const queryChatroomWhere = async (id:number) => {
@@ -41,13 +39,13 @@ export const queryChatrooms = async (user: User) => {
     console.log("############\n\n",fetchedIds);
     let chatroomss: any[] = []
     for (let j = 0; j < fetchedIds.length; j++){
-        let chatroomObject = new ChatroomObj(fetchedIds[j],[] as Message[] )
+        let chatroomObject = new Chatroom(fetchedIds[j],[] as Message[] )
         const chatroomReff = collection(db,"chatrooms/"+fetchedIds[j]+"/messages")
         const q = query(chatroomReff) //must be a string :rage:
         const querySnapshot = await getDocs(q);
         
         querySnapshot.forEach((doc) => {    
-            let msg = new Message(doc.data().message, fetchedIds[j])  
+            let msg = new Message(doc.data().message, doc.data().sender)  
             chatroomObject.messages?.push(msg)
             // doc.data() is never undefined for query doc snapshots
         });
@@ -79,7 +77,7 @@ export const queryChatrooms = async (user: User) => {
     })
 */
 
-
+/*
 export const addChatroom = (chatroom: Chatroom, user: User) => {
     // indsæt getState: any i dispatchen for at få den næste kommentar til at være valid (?)
      return async (dispatch: (arg0: { type: string; payload: any;}) => void) => {
@@ -114,6 +112,8 @@ export const addChatroom = (chatroom: Chatroom, user: User) => {
         }
     };
 };
+
+*/
 
 
 /*

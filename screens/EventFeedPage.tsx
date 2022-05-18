@@ -1,11 +1,5 @@
 import React, {useEffect} from "react"
-import { StyleSheet, Text, View, SafeAreaView, ScrollView } from 'react-native';
-import EventBlogComp from '../components/EventBlogComp';
-import { useNavigation } from '@react-navigation/native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { StackParamList } from "../typings/navigations";
-
-//import React from 'react'
+import { StyleSheet, Text, View, SafeAreaView} from 'react-native';
 import {FlatList, TouchableOpacity } from 'react-native'
 import {EventBlogItemComp} from '../components/EventBlogItemComp'
 import { EventBlogItem } from '../entities/EventBlogItem'
@@ -21,14 +15,12 @@ export default function EventFeedPage({navigation}) {
     useEffect(() => { 
         handleFetchEvent()
         console.log("at launch")
-        }, [] );
+        }, [] 
+        );
 
     const renderItem = ({item}: {item: EventBlogItem}) => {
-        // Deal with dates in here
-
 
         const sourceimage = defaultImage(item.img)
-        console.log(item)
         return (
             <TouchableOpacity onPress={() => navigation.navigate("EventPage", {item})}>
                 <EventBlogItemComp 
@@ -89,6 +81,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     scrollable: {
-        marginBottom: 140
+        marginBottom: 120
     }
 })  

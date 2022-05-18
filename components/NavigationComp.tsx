@@ -8,7 +8,7 @@ import { NavigationContainer, StackActions, useNavigation } from '@react-navigat
 import * as SecureStore from 'expo-secure-store'
 import LandingPage from "../screens/LandingPage";
 import SignUpPage from "../screens/SignUpPage";
-import TestPage from "../screens/EventFeedPage";
+import EventFeedPage from "../screens/EventFeedPage";
 import LoggedInLandingPage from "../screens/LoggedInLanding"
 import { updateUser } from '../store/actions/user.actions';
 import {ProfilePage} from '../screens/ProfilePage';
@@ -18,7 +18,6 @@ import {ProfileEditPage} from "../screens/ProfileEditPage"
 import EventPage from "../screens/EventPage";
 import {User} from "../entities/User"
 import LoggedInLanding from '../screens/LoggedInLanding';
-import EventFeedPage from '../screens/EventFeedPage';
 
 let user: any = undefined;
 

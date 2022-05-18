@@ -5,7 +5,6 @@ import { db } from "../../App";
 export const FETCHEVENT = 'FETCHEVENT'
 
 export const queryEvent = async () => {
-
     
         let eventArray: EventBlogItem[] = []
         const eventsRef = collection(db, "events");

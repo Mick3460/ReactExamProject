@@ -10,7 +10,11 @@ import chatReducer from './store/reducers/chat.reducer';
 import userReducer from './store/reducers/user.reducer';
 import eventReducer from './store/reducers/event.reducer';
 import { useNavigation } from '@react-navigation/native';
+import { LogBox } from 'react-native';
 
+LogBox.ignoreLogs(['Require cycle:', 'Setting a timer']);
+//LogBox.ignoreLogs(['Warning: Async Storage has been extracted from react-native core']);
+LogBox.ignoreAllLogs(true)
 
 // Import the functions you need from the SDKs you need
 // TODO: Add SDKs for Firebase products that you want to use

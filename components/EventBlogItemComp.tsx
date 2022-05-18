@@ -1,16 +1,7 @@
 import React from 'react'
-import { ImageBackground, StyleSheet, TouchableOpacity } from 'react-native'
-import {View, Text, Image, SafeAreaView, ImageSourcePropType } from 'react-native'
+import { ImageBackground, StyleSheet} from 'react-native'
+import {Text, SafeAreaView, ImageSourcePropType } from 'react-native'
 import {LinearGradient} from 'expo-linear-gradient'
-
-
-// works
-function trimDetail(detail: string) {
-    if(detail.length > 110) {
-        return detail.slice(0, 110)+"..."
-    }
-    return detail
-}
 
 export const EventBlogItemComp = ({title, img, date, location, detail}: {title: string, img: ImageSourcePropType, date: string, location: string, detail: string}) => {
     return (

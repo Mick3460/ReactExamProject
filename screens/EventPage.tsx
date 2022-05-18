@@ -5,10 +5,8 @@ import {defaultImage} from './EventFeedPage'
 const icons = [require('../assets/location.png'), require('../assets/calendar.png')]
 
 export default function EventPage({route}) {
-//console.log(route.params)
+
 const item = route.params.item
-//console.log(item)
-// Use the id from the route to fetch from the database
 // 
     return (
         <View style={styles.container}>
@@ -28,8 +26,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#fff',
-        //alignItems: 'flex-start',
-        //justifyContent: 'center',
     },
     cover: {
         width: '100%',
@@ -39,11 +35,11 @@ const styles = StyleSheet.create({
     eventBox: {
         marginTop: 10,
         marginLeft: 20,
+        marginRight: 20
     },
     eventTitle: {
         fontSize: 40,
         fontWeight: 'bold',
-        marginRight: 10
     },
     eventDate: {
         fontSize: 20,
@@ -51,7 +47,6 @@ const styles = StyleSheet.create({
     },
     eventLocation: {
         fontSize: 20,
-        marginRight: 10
     },
     eventDescription: {
         marginTop: 20,

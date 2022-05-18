@@ -2,22 +2,80 @@ import React, {useEffect} from "react"
 import { View, Text, FlatList, TextInput, TouchableOpacity, StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useDispatch, useSelector } from "react-redux";
+import { Chatroom } from "../entities/Chatroom";
+import ChatroomComp from "../components/ChatroomComp";
+import { queryChatrooms } from "../store/actions/chat.actions";
+import { User } from "../entities/User";
 
-export default function ChatroomsPage () {
+export default function ChatroomsPage ({navigation}) {
+    const chatrooms: Chatroom[] = useSelector((state: any) => state.chat.chatrooms)
+    const user: User = useSelector( (state:any) => state.user.loggedInUser)
+    const dispatch = useDispatch()
 
+    async function handleFetchChatroom() {
+        dispatch(await queryChatrooms(user))
+    }
+
+    useEffect(() => { 
+        handleFetchChatroom()
+        }, [] );
     
+       useEffect(() => {
+       if (chatrooms) {
+       console.log("Update chatrooms useEffect() ")
+       }
+       }, [chatrooms]);
+
+
+    const renderItem = ({item}: {item: Chatroom}) => {
+        let lol = "tetttt"
+        return (
+            <TouchableOpacity onPress={() => navigation.navigate("SpecificChatroom", {item})}>
+            {/* Make a component that shows item.id and item.lastMessage*/ }
+            <ChatroomComp chatroom={item}
+            />
+            </TouchableOpacity>
+        )
+    }
+
     return (
         <SafeAreaView>
-            <Text>lol</Text>
-        </SafeAreaView>
-    )
+            <View style={styles.topBar}>
+                <Text style={styles.barText}>CHAT MESSSAGES</Text>
+            </View>
+            <SafeAreaView style={styles.container}>
+                <FlatList // FlatList is scrollable
+                    data= {chatrooms}
+                    renderItem={renderItem}
+                    style={styles.scrollable}>
+                </FlatList>
+            </SafeAreaView >
+        </SafeAreaView >
+    );
 }
 
+
 const styles = StyleSheet.create({
-    container: {
+    topBar: {
         flex: 1,
-        backgroundColor: '#fff',
         alignItems: 'center',
-        justifyContent: 'center',
+        //marginTop: 180,
+        minHeight: 120,
+        width: '100%',
+        backgroundColor: '#fff',
     },
+    barText: {
+        marginTop: 50,
+        marginBottom: 30,
+        fontSize: 30,
+        fontWeight: 'bold',
+        color: 'rgb(30, 120, 190)'
+    },
+    container: {
+        marginTop: 0,
+        alignItems: 'center',
+    },
+    scrollable: {
+        marginBottom: 120
+    }
 })  

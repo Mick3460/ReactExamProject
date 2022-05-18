@@ -7,49 +7,40 @@ import { Message } from "../entities/Message";
 import { queryChatrooms } from "../store/actions/chat.actions";
 
 
-export default function ChatroomsPage() {
+export default function ChatroomsPage({route}) {
     
     const dispatch = useDispatch()
     const [message, onChangeMessage] = React.useState('');
-    const chatrooms: Chatroom[] = useSelector((state: any) => state.chat.chatrooms)
     const user = useSelector( (state:any) => state.user.loggedInUser )
 
-    const testt = chatrooms[0]
-    let messageArray = testt?.messages
+    let item = route.params.item
+    let msgArray = item.messages
+    console.log("YAYET\n\n");
+    console.log(item)
 
     async function handleFetchChatroom() {
         dispatch(await queryChatrooms(user))
     }
 
     useEffect(() => { 
-    handleFetchChatroom()
-    console.log("\n\n\n££££££££££££££££££££££")
-    console.log(user);
-    console.log("\n\n\n£££££££££££££££££££££")
+    //handleFetchChatroom()
+
     }, [] );
 
+/*
    useEffect(() => {
    if (chatrooms) {
    console.log("Update chatrooms useEffect() ")
    }
    }, [chatrooms]); // The second parameters are the variables this useEffect is listening to for changes.
+*/
 
    const handleAddChatroom = () => {
     //const chatroom: Chatroom = new Chatroom(message.substring(0,12), message, new Date());
     //dispatch(addChatroom(chatroom,user));
    }
-   /*
-   const checkTime = (item: Chatroom) => {
-       
-       if (item.timestamp == null)
-       return new Date().toString();
-       if (item.timestamp != null)
-       return item.timestamp.toString();
-       else
-       return new Date().toString();
-   }
 
-   */
+
    const renderChatroom = ({ item } : { item: Message }) => (
     <View style={user.uid.trim() == item.sender.trim() ? styles.rightChatBox : styles.leftChatBox}>
     <Text style={{fontWeight: 'bold', fontSize: 10}}>{item.sender}</Text>
@@ -69,9 +60,9 @@ export default function ChatroomsPage() {
 
         <FlatList
         style={styles.theList}
-        data={messageArray}
+        data={msgArray}
         renderItem={renderChatroom}
-        keyExtractor={item => item.sender} // TODO: MAKE A UNIQUE ID ON ITEMS / MESSAGES IN DB
+        //keyExtractor={item => item.sender} // TODO: MAKE A UNIQUE ID ON ITEMS / MESSAGES IN DB
         
         />
         <TextInput
@@ -88,7 +79,18 @@ export default function ChatroomsPage() {
     )
 }
 
+   /*
+   const checkTime = (item: Chatroom) => {
+       
+       if (item.timestamp == null)
+       return new Date().toString();
+       if (item.timestamp != null)
+       return item.timestamp.toString();
+       else
+       return new Date().toString();
+   }
 
+   */
 
 const styles = StyleSheet.create({
     //<Button title="Send chat msg" onPress={handleAddChatroom} />

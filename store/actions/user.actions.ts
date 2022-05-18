@@ -48,7 +48,7 @@ async function addANewUserToFireStore(user: User) {
 
   async function readASingleUserDocument(path:string) {
 
-    const docReff = doc(db,path)
+    const docReff = doc(db,"users/"+path)
     const mySnapshot = await getDoc(docReff)
     
     if (mySnapshot.exists()) {
@@ -85,7 +85,7 @@ export const signInFirebase = async (email:string ,password: string) => {
     const response = await signInWithEmailAndPassword(auth,email,password)
     const userUid = response.user.uid
     const idToken = response._tokenResponse.idToken
-    const fetchUser = await readASingleUserDocument("users/"+userUid) as User
+    const fetchUser = await readASingleUserDocument(userUid) as User
     fetchUser.idToken = idToken
     console.log("fetchuser: ",fetchUser)
     return {type: SIGNIN, payload: {user: fetchUser, registered: true}} //TODO:FIKS

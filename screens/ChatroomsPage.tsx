@@ -1,13 +1,23 @@
 import React, {useEffect} from "react"
 import { View, Text, FlatList, TextInput, TouchableOpacity, StyleSheet } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function ChatroomsPage () {
 
-    let test;
+    
     return (
-        <View>
+        <SafeAreaView>
             <Text>lol</Text>
-        </View>
+        </SafeAreaView>
     )
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+})  

@@ -71,7 +71,7 @@ export default function ChatroomsPage() {
         style={styles.theList}
         data={messageArray}
         renderItem={renderChatroom}
-        //keyExtractor={item => item.sender} // MAKE A UNIQUE ID ON ITEMS
+        keyExtractor={item => item.sender} // TODO: MAKE A UNIQUE ID ON ITEMS / MESSAGES IN DB
         
         />
         <TextInput

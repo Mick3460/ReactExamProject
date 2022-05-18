@@ -22,12 +22,12 @@ export default function ChatroomsPage({route}) {
         dispatch(await queryChatrooms(user))
     }
 
+    
+    /*
     useEffect(() => { 
     //handleFetchChatroom()
 
     }, [] );
-
-/*
    useEffect(() => {
    if (chatrooms) {
    console.log("Update chatrooms useEffect() ")
@@ -104,6 +104,7 @@ const styles = StyleSheet.create({
     theList: {
         backgroundColor: 'lightgrey',
         width: 300,
+        flexDirection: 'column-reverse'
     },
     leftChatBox: {
         borderWidth: 2, borderColor: 'lightblue', borderRadius: 20,  alignItems: "flex-start",

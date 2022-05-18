@@ -37,7 +37,7 @@ export const queryChatrooms = async (user: User) => {
 
     //fetch the messages within every chatroom id
     console.log("############\n\n",fetchedIds);
-    let chatroomss: any[] = []
+    let chatroomss: Chatroom[] = []
     for (let j = 0; j < fetchedIds.length; j++){
         let chatroomObject = new Chatroom(fetchedIds[j],[] as Message[] )
         const chatroomReff = collection(db,"chatrooms/"+fetchedIds[j]+"/messages")
@@ -49,6 +49,7 @@ export const queryChatrooms = async (user: User) => {
             chatroomObject.messages?.push(msg)
             // doc.data() is never undefined for query doc snapshots
         });
+        chatroomObject.messages?.reverse() //reverse list hack :D
         chatroomss.push(chatroomObject)
     }
     console.log("\n \n this is all the chatrooms objects:", chatroomss);

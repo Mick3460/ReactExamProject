@@ -10,7 +10,7 @@ export default function ChatroomComp ({chatroom} : {chatroom: Chatroom}){ //chat
     let lastMsg = chatroom.messages?.[0].message
 
     return (
-        <View>
+        <View style={styles.container}>
             <Text>lol:{lastMsgIndex}</Text>
             <Text>lol:{lastMsg}</Text>
         </View>
@@ -34,6 +34,8 @@ const styles = StyleSheet.create({
         color: 'rgb(30, 120, 190)'
     },
     container: {
+        borderColor: 'black',
+        borderWidth: 4,
         marginTop: 0,
         alignItems: 'center',
     },

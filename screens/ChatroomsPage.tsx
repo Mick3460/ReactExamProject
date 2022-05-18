@@ -28,12 +28,13 @@ export default function ChatroomsPage ({navigation}) {
 
 
     const renderItem = ({item}: {item: Chatroom}) => {
-        let lol = "tetttt"
+        
         return (
             <TouchableOpacity onPress={() => navigation.navigate("SpecificChatroom", {item})}>
-            {/* Make a component that shows item.id and item.lastMessage*/ }
+                <View style={styles.container}>
             <ChatroomComp chatroom={item}
             />
+                </View>
             </TouchableOpacity>
         )
     }
@@ -72,6 +73,7 @@ const styles = StyleSheet.create({
         color: 'rgb(30, 120, 190)'
     },
     container: {
+        backgroundColor: 'red',
         marginTop: 0,
         alignItems: 'center',
     },

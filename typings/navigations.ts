@@ -11,4 +11,5 @@ export type StackParamList = {
     Chatroom: undefined;
     SpecificChatroom: undefined;
     Homescreen: undefined;
+    NewEventPage: undefined;
 }

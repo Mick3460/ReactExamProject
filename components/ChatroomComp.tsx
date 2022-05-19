@@ -4,8 +4,8 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { Chatroom } from '../entities/Chatroom';
 import { Message } from '../entities/Message';
 
-function trimMessage(msg: string) {
-    if(msg.length > 20) {
+function trimMessage(msg?: string) {
+    if(msg && msg.length > 20) {
         return msg.substring(0,20) + "..."
     } 
     return msg

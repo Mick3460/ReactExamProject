@@ -1,10 +1,11 @@
 import { View, Text, TextInput, StyleSheet, Button } from 'react-native'
 import React, { useState } from 'react'
 import { auth, db } from '../App'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { updateEmail, updateProfile, User as AuthUser } from 'firebase/auth'
 import { doc, setDoc } from 'firebase/firestore'
 import { User } from '../entities/User'
+import { updateUser } from '../store/actions/user.actions'
 
 
 const handleUpdateUserInfo = (displayName: string, first:string, last: string, email: string, description: string) => {
@@ -25,10 +26,21 @@ const handleUpdateUserInfo = (displayName: string, first:string, last: string, e
         first,
         last,
         email,
-        description,
+        description
     }, {merge: true})
     .then(() => {
         //TODO: add dispatch so the user store get updated with new values locally
+
+        const dispatch = useDispatch()
+
+        dispatch(updateUser({
+            displayName,
+            first,
+            last,
+            email,
+            description
+        }))
+        
     })
 }
 
@@ -85,7 +97,7 @@ export const ProfileEditPage: React.FC = () => {
 
             <Button
             title='Save Changes'
-            onPress={() => handleUpdateUserInfo(displayname, first, last, email, description)}
+            onPress={() => handleUpdateUserInfo(displayname!, first!, last!, email!, description!)}
             />
         </View>
     )

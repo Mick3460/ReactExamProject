@@ -120,8 +120,12 @@ export default function NavigationComp () {
                 ) : (
 
             <Tab.Navigator screenOptions={{ headerShown: false }}>
-                <Tab.Screen name="Landing Page" component={LandingPageStackNavigator} />
-                <Tab.Screen name="SignUpPage" component={SignUpPage} />
+                <Tab.Screen name="Login" component={LandingPageStackNavigator} options={{tabBarIcon: ({  }) => (
+                  <Icon name="login" size={30} color="#0000FF"/>
+                )}} />
+                <Tab.Screen name="Sign Up" component={SignUpPage}  options={{tabBarIcon: ({  }) => (
+                  <Icon name="adduser" size={30} color="#0000FF"/>
+                )}}/>
             </Tab.Navigator>
             )}
         </NavigationContainer>

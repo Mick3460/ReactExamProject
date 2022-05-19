@@ -30,8 +30,9 @@ export const logOut = () => {
 
 async function addANewUserToFireStore(user: User) {
     try {
-        const docRef = doc(db,"users/"+user.uid)
+        const docRef = doc(db,"users/"+user.uid) 
         const newDoc = await setDoc(docRef, { 
+        
         displayName: "user.displayname",
         first: "Michael",
         last: "Big papa",
@@ -39,7 +40,7 @@ async function addANewUserToFireStore(user: User) {
         uid: user.uid,
         photoURL: "https://i.kym-cdn.com/photos/images/facebook/001/459/556/023.png",
         connectedChatroomIds: [1,2],
-        description: user.description
+        description: "Lol"
       })
     } catch (e){
       console.log(e)
@@ -87,7 +88,7 @@ export const signInFirebase = async (email:string ,password: string) => {
     const idToken = response._tokenResponse.idToken
     const fetchUser = await readASingleUserDocument(userUid) as User
     fetchUser.idToken = idToken
-    console.log("fetchuser: ",fetchUser)
+    console.log("&¤#&¤#¤&/fetchuser: ",fetchUser)
     return {type: SIGNIN, payload: {user: fetchUser, registered: true}} //TODO:FIKS
 }
 

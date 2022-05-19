@@ -61,6 +61,4 @@ const styles = StyleSheet.create({
     innerText: {
         fontWeight: 'bold'
     }
-})  
-
-
+}) 

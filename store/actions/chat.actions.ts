@@ -10,7 +10,7 @@ export const FETCH_CHATROOMS = 'FETCH_CHATROOMS';
 
 
 // Create a reference to the cities collection
-import { collection, doc, getDocs, query, where } from "firebase/firestore";
+import { addDoc, collection, doc, getDocs, query, where ,FieldValue, serverTimestamp, orderBy} from "firebase/firestore";
 import { db } from "../../App";
 
 
@@ -36,23 +36,42 @@ export const queryChatrooms = async (user: User) => {
     }
 
     //fetch the messages within every chatroom id
-    console.log("############\n\n",fetchedIds);
     let chatroomss: Chatroom[] = []
     for (let j = 0; j < fetchedIds.length; j++){
         let chatroomObject = new Chatroom(fetchedIds[j],[] as Message[] )
         const chatroomReff = collection(db,"chatrooms/"+fetchedIds[j]+"/messages")
-        const q = query(chatroomReff) //must be a string :rage:
+        const q = query(chatroomReff, orderBy("createdAt")) //must be a string :rage:
         const querySnapshot = await getDocs(q);
         
         querySnapshot.forEach((doc) => {    
-            let msg = new Message(doc.data().message, doc.data().sender)  
+            let msg = new Message(doc.data().message, doc.data().sender,doc.data().createdAt)
+            console.log(doc.data().createdAt);
+              
             chatroomObject.messages?.push(msg)
             // doc.data() is never undefined for query doc snapshots
         });
         chatroomObject.messages?.reverse() //reverse list hack :D
+        
         chatroomss.push(chatroomObject)
+        console.log("#############",chatroomss);
+        
     }
-    console.log("\n \n this is all the chatrooms objects:", chatroomss);
+    
     return {type: FETCH_CHATROOMS, payload: chatroomss}
 }
 
+export const addMessage = async (msg: Message,chatroomId: string) => {
+    
+    try {
+        //const docRef = doc(collection(db,"chatrooms/"+chatroomId+"/messages"))
+        const newDoc = await addDoc(collection(db,"chatrooms/"+chatroomId+"/messages"), { 
+        message: msg.message,
+        sender: msg.sender,
+        createdAt: serverTimestamp()
+      })
+    } catch (e){
+      console.log(e)
+    }
+    
+    return {type: ADD_CHATROOM, payload: {msg, chatroomId: chatroomId.toString()}}
+}

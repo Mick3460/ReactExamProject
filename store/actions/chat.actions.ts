@@ -50,10 +50,10 @@ export const queryChatrooms = async (user: User) => {
             chatroomObject.messages?.push(msg)
             // doc.data() is never undefined for query doc snapshots
         });
-        chatroomObject.messages?.reverse() //reverse list hack :D
+        
         
         chatroomss.push(chatroomObject)
-        console.log("#############",chatroomss);
+        
         
     }
     
@@ -69,6 +69,7 @@ export const addMessage = async (msg: Message,chatroomId: string) => {
         sender: msg.sender,
         createdAt: serverTimestamp()
       })
+
     } catch (e){
       console.log(e)
     }

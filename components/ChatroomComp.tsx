@@ -11,8 +11,8 @@ function trimMessage(msg?: string) {
     return msg
 }
 
-function trimUsername(name: string) {
-    if(name.length > 25) {
+function trimUsername(name?: string) {
+    if(name && name.length > 25) {
         return name.substring(0,25) + "..."
     }
     return name

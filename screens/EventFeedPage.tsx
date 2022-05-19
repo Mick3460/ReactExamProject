@@ -1,10 +1,11 @@
 import React, {useEffect} from "react"
-import { StyleSheet, Text, View, SafeAreaView} from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView, Image} from 'react-native';
 import {FlatList, TouchableOpacity } from 'react-native'
 import {EventBlogItemComp} from '../components/EventBlogItemComp'
 import { EventBlogItem } from '../entities/EventBlogItem'
 import { useDispatch, useSelector } from "react-redux";
 import {queryEvent} from '../store/actions/event.actions'
+import Icon from 'react-native-vector-icons/AntDesign';
 
 export default function EventFeedPage({navigation}) {
     const firebaseArray: EventBlogItem[] = useSelector((state: any) => state.event.events) // It pushes the data as an array into the firebaseArray, bruh
@@ -36,16 +37,22 @@ export default function EventFeedPage({navigation}) {
 
     return (
         <SafeAreaView>
+        <TouchableOpacity style={{margin:30}} onPress={() => navigation.navigate("NewEventPage")}><Text>NEW</Text></TouchableOpacity>
             <View style={styles.topBar}>
                 <Text style={styles.barText}>EVENT FEED</Text>
+                
             </View>
             <SafeAreaView style={styles.container}>
+            
+            
                 <FlatList // FlatList is scrollable
                     data= {firebaseArray}
                     renderItem={renderItem}
                     style={styles.scrollable}>
                 </FlatList>
+                
             </SafeAreaView >
+            
         </SafeAreaView >
     );
 }
@@ -64,7 +71,6 @@ const styles = StyleSheet.create({
     topBar: {
         flex: 1,
         alignItems: 'center',
-        //marginTop: 180,
         minHeight: 120,
         width: '100%',
         backgroundColor: '#fff',
@@ -82,5 +88,5 @@ const styles = StyleSheet.create({
     },
     scrollable: {
         marginBottom: 120
-    }
+    },
 })  

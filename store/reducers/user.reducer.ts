@@ -40,7 +40,8 @@ const userReducer = (state: ReduxState = initialState, action: any) => {
             return {...state, validUser: false, loggedInUser: undefined, idToken: undefined}
             
         case UPDATE_USER:
-            return {...state, validUser: true, loggedInUser: action.payload.userJson}
+            console.log("in user reducer",action.payload)
+            return {...state, validUser: true, loggedInUser:{ ...state.loggedInUser, ...action.payload.userJson}}
         case ERROR:
             return state
         default: 

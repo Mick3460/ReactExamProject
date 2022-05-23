@@ -9,6 +9,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { StackParamList } from '../typings/navigations';
 //import * as SecureStore from 'expo-secure-store'
 import SignUpPage from "./SignUpPage"
+import WeatherWidget from "../components/WeatherWidget"
 
 type ScreenNavigationType = NativeStackNavigationProp<
     StackParamList,
@@ -42,12 +43,6 @@ export default function LandingPage() {
 
         <View style={styles.container}>
             <ImageBackground source={img} style={styles.img}>
-
-                {/* Remove this */}
-
-
-
-                {/* To here */}
 
                 {/*Email, Password textfields with sign in */}
                 <View>

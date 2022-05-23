@@ -8,45 +8,48 @@ import { User } from '../entities/User'
 import { updateUser } from '../store/actions/user.actions'
 
 
-const handleUpdateUserInfo = (displayName: string, first:string, last: string, email: string, description: string) => {
-    const docRef = doc(db, "users/" + auth.currentUser?.uid)
 
-    //new email
-    if (auth.currentUser?.email !== email) {
-        updateEmail(auth.currentUser as AuthUser, email)
-    }
-    //new displayName
-    if (auth.currentUser?.displayName !== displayName) {
-        updateProfile(auth.currentUser as AuthUser, {displayName: displayName})
-    }
 
-    //update userinformation in db
-    setDoc(docRef, {
-        displayName,
-        first,
-        last,
-        email,
-        description
-    }, {merge: true})
-    .then(() => {
-        //TODO: add dispatch so the user store get updated with new values locally
 
-        const dispatch = useDispatch()
+export const ProfileEditPage: React.FC = () => {
+    const user: User = useSelector((state: any) => state.user.loggedInUser)
+    const dispatch = useDispatch()
 
-        dispatch(updateUser({
+    const handleUpdateUserInfo = (displayName: string, first:string, last: string, email: string, description: string) => {
+        const docRef = doc(db, "users/" + auth.currentUser?.uid)
+    
+        //new email
+        if (auth.currentUser?.email !== email) {
+            updateEmail(auth.currentUser as AuthUser, email)
+        }
+        //new displayName
+        if (auth.currentUser?.displayName !== displayName) {
+            updateProfile(auth.currentUser as AuthUser, {displayName: displayName})
+        }
+    
+    
+        //update userinformation in db
+        setDoc(docRef, {
             displayName,
             first,
             last,
             email,
             description
-        }))
-        
-    })
-}
-
-
-export const ProfileEditPage: React.FC = () => {
-    const user: User = useSelector((state: any) => state.user.loggedInUser)
+        }, {merge: true})
+        .then(() => {
+            //TODO: add dispatch so the user store get updated with new values locally
+    
+    
+            dispatch(updateUser({
+                displayName,
+                first,
+                last,
+                email,
+                description
+            }))
+            
+        })
+    }
 
     const [displayname, setDisplayname] = useState(user.displayname)
     const [first, setFirst] = useState(user.first)

@@ -65,10 +65,9 @@ const styles = StyleSheet.create({
     },
     allOfSignup: {
         height: '50%',
+        width: '90%',
         justifyContent: 'center',
         alignItems: 'center',
-
-
     },
 
     signupBox: {

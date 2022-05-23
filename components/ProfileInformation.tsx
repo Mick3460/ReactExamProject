@@ -23,7 +23,7 @@ export const ProfileInformation: React.FC<Props> = ({user, navigation}) => {
                 >
                     <Image
                         style={styles.profilePicture}
-                        source={{ uri: user.photoUrl as string }}
+                        source={{ uri: user.photoURL as string }}
                     />
                 </View>
                 <View

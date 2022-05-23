@@ -8,8 +8,6 @@ import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { StackParamList } from '../typings/navigations';
 //import * as SecureStore from 'expo-secure-store'
-import SignUpPage from "./SignUpPage"
-import WeatherWidget from "../components/WeatherWidget"
 
 type ScreenNavigationType = NativeStackNavigationProp<
     StackParamList,

@@ -8,9 +8,6 @@ import { User } from '../entities/User'
 import { updateUser } from '../store/actions/user.actions'
 
 
-
-
-
 export const ProfileEditPage: React.FC = () => {
     const user: User = useSelector((state: any) => state.user.loggedInUser)
     const dispatch = useDispatch()
@@ -51,7 +48,7 @@ export const ProfileEditPage: React.FC = () => {
         })
     }
 
-    const [displayname, setDisplayname] = useState(user.displayname)
+    const [displayname, setDisplayname] = useState(user.displayName)
     const [first, setFirst] = useState(user.first)
     const [last, setLast] = useState(user.last)
     const [email, setEmail] = useState(user.email)

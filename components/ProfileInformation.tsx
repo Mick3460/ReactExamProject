@@ -1,8 +1,5 @@
 import { View, Text, Image, StyleSheet, Button, Dimensions } from 'react-native'
 import React from 'react'
-import { UserInfo } from '../entities/UserInfo'
-import NavigationComp from './NavigationComp'
-import { useNavigation } from "@react-navigation/native" 
 import { User } from '../entities/User'
 
 

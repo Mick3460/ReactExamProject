@@ -1,15 +1,12 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View, LogBox } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { Provider, useDispatch, useSelector } from 'react-redux';
+import { StyleSheet, LogBox } from 'react-native';
+import { Provider} from 'react-redux';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import ReduxThunk from 'redux-thunk'
 import NavigationComp from './components/NavigationComp';
 import chatReducer from './store/reducers/chat.reducer';
 import userReducer from './store/reducers/user.reducer';
 import eventReducer from './store/reducers/event.reducer';
-import { useNavigation } from '@react-navigation/native';
 
 //react query
 import { QueryClient, QueryClientProvider } from "react-query";
@@ -27,7 +24,7 @@ LogBox.ignoreAllLogs(true)
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, addDoc, collectionGroup, getDoc, doc, setDoc, onSnapshot, query, where, getDocs } from 'firebase/firestore';
+import { getFirestore } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
 
 

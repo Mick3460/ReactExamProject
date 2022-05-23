@@ -1,5 +1,5 @@
 import React, {useEffect} from "react"
-import { View, Text, FlatList, TextInput, TouchableOpacity, StyleSheet } from "react-native";
+import { View, Text, FlatList, TouchableOpacity, StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useDispatch, useSelector } from "react-redux";
 import { Chatroom } from "../entities/Chatroom";

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, StyleSheet, Text, View, ImageBackground } from 'react-native';
+import { StyleSheet, Text, View, ImageBackground } from 'react-native';
 import { useDispatch } from 'react-redux';
 import WeatherWidget from '../components/WeatherWidget';
 import { logOut } from '../store/actions/user.actions';

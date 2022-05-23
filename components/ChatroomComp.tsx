@@ -1,9 +1,7 @@
 import React from 'react'
 import { View,  Text , StyleSheet, FlatList, TouchableOpacity, Image} from "react-native";
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { Chatroom } from '../entities/Chatroom';
-import { Message } from '../entities/Message';
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 function trimMessage(msg?: string) {
     if(msg && msg.length > 20) {

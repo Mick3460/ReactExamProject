@@ -5,7 +5,6 @@ import {EventBlogItemComp} from '../components/EventBlogItemComp'
 import { EventBlogItem } from '../entities/EventBlogItem'
 import { useDispatch, useSelector } from "react-redux";
 import {queryEvent} from '../store/actions/event.actions'
-import Icon from 'react-native-vector-icons/AntDesign';
 
 export default function EventFeedPage({navigation}) {
     const firebaseArray: EventBlogItem[] = useSelector((state: any) => state.event.events) // It pushes the data as an array into the firebaseArray, bruh

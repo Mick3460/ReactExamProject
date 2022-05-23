@@ -1,12 +1,5 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
-import { useDispatch } from 'react-redux';
-import { useNavigation } from '@react-navigation/native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { StackParamList } from '../typings/navigations';
-import { createEventFirebase } from '../store/actions/event.actions';
-import {EventBlogItem} from '../entities/EventBlogItem'
-import { Picker } from "@react-native-picker/picker";
 import SelectDropdown from 'react-native-select-dropdown'
 
 

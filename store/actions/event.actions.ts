@@ -1,5 +1,5 @@
 import {EventBlogItem} from "../../entities/EventBlogItem"
-import { collection, query, where, getDocs, doc, setDoc  } from "firebase/firestore";
+import { collection, query, getDocs, doc, setDoc  } from "firebase/firestore";
 import { db } from "../../App";
 
 export const FETCHEVENT = 'FETCHEVENT'

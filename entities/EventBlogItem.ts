@@ -1,5 +1,3 @@
-import { ImageSourcePropType } from "react-native";
-
 export class EventBlogItem{
     public startDate: ReactDate
     public startEpoch: number

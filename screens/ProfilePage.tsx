@@ -1,12 +1,9 @@
 import { View, Button } from 'react-native'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { ProfileInformation} from '../components/ProfileInformation'
 import Seperator from '../components/Seperator'
 import { useDispatch, useSelector } from 'react-redux'
 import { logOut } from '../store/actions/user.actions'
-import { UserInfo } from '../entities/UserInfo'
-import { collection, doc, getDoc } from 'firebase/firestore'
-import { auth, db } from '../App'
 
 
 interface Props {

@@ -3,7 +3,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React, { useEffect } from 'react';
 import { StackParamList } from '../typings/navigations';
 import { useDispatch, useSelector } from 'react-redux';
-import { NavigationContainer, StackActions, useNavigation } from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native';
 //import AsyncStorage from '@react-native-community/async-storage';
 import * as SecureStore from 'expo-secure-store'
 import LandingPage from "../screens/LandingPage";

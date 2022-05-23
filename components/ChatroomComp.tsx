@@ -35,12 +35,14 @@ export default function ChatroomComp ({chatroom} : {chatroom: Chatroom}){ //chat
     })
     
     const chatrooms: Chatroom[] = useSelector((state: any) => state.chat.chatrooms)
-
+    let lastMsg;
     // Once we know the 2 users in the room we can also adjust the last message string to include username
-    let lastMsg = chatroom.messages?.[chatroom.messages.length-1].message as string
-    const lastUser = chatroom.messages?.[chatroom.messages.length-1].sender as string
-    if(lastUser == loggedInUser.uid) {
-        lastMsg = "You: " + lastMsg
+    if (chatroom.messages != undefined && chatroom.messages.length > 0){
+        lastMsg = chatroom.messages?.[chatroom.messages.length-1].message as string
+        const lastUser = chatroom.messages?.[chatroom.messages.length-1].sender as string
+        if(lastUser == loggedInUser.uid) {
+            lastMsg = "You: " + lastMsg
+        }
     }
     return (
         <View style={styles.container}>

@@ -2,10 +2,14 @@ import { ImageSourcePropType } from "react-native";
 
 export class EventBlogItem{
     public startDate: ReactDate
+    public startEpoch: number
+    public endEpoch: number
     public endDate: ReactDate
     constructor(public id: string, public title: string, startDate: number, endDate: number, public location: string, public detail: string, public img?: string,) {
         this.startDate = new ReactDate(startDate) // converting
         this.endDate = new ReactDate(endDate) // converting
+        this.startEpoch = startDate
+        this.endEpoch = endDate
     }
 
     // Date string for event feed

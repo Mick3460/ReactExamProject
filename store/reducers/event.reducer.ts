@@ -1,5 +1,5 @@
 import {EventBlogItem} from "../../entities/EventBlogItem"
-import { FETCHEVENT } from "../actions/event.actions";
+import { FETCHEVENT, NEWEVENT } from "../actions/event.actions";
 
 interface ReduxState {
     events: EventBlogItem[]
@@ -16,7 +16,8 @@ interface ReduxAction {
 
 const userReducer = (state: ReduxState = initialState, action: any) => {
     switch (action.type) {
-        
+        case NEWEVENT:
+            return state;
         case FETCHEVENT:
             return {...state, events: action.payload as EventBlogItem[]} // This pushes the queried array into the state array? but we only want the elements.
         default: 

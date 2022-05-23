@@ -32,12 +32,24 @@ const chatReducer = (state: ReduxState = initialState, action: ReduxAction) => {
             let thisId = action.payload?.chatroomId
             console.log(thisId);
             
-            const index = state.chatrooms.findIndex(id => id == action.payload?.chatroomId)
-            const chatroomToUpdate = state.chatrooms[index] //TODO: insert action.payload
-            return {...state, chatrooms: [...state.chatrooms, action.payload]}
-        case FETCH_CHATROOMS:
-            console.log("fetch chatroom reducer reached");
+            //find the index of the chatroom we wish to add a chat to
+            const index = state.chatrooms.findIndex(chatroom => chatroom.id == thisId)
+            console.log("index for idet:",index);
             
+            let chatroomToUpdate = state.chatrooms[index]
+            console.log("chatroom to update",chatroomToUpdate);
+            
+            //push the msg from the user
+            chatroomToUpdate.messages?.push(action.payload?.msg)
+            console.log("chatroom to update AFTER PUSH",chatroomToUpdate);
+            
+            //filter out the old chatroom, insert Chatroom to update
+            let newChatroom = state.chatrooms.filter( (chatroom) => {chatroom.id == thisId })
+            console.log("the new chatroom to replace the old one:", newChatroom);
+            
+            return {...state, chatrooms: [newChatroom, chatroomToUpdate]}
+
+        case FETCH_CHATROOMS:
             return {...state, chatrooms: action.payload}
 
         default:

@@ -37,7 +37,7 @@ export default function ChatroomsPage({route}) {
 
    const handleAddMessage = async () => {
         const msg: Message = new Message(messageInput,user.uid);
-        msgArray.push(msg)   
+        //msgArray.push(msg)   
         dispatch( await addMessage(msg,chatroomId));
         onChangeMessage('')
     }

@@ -9,6 +9,7 @@ import * as SecureStore from 'expo-secure-store'
 import LandingPage from "../screens/LandingPage";
 import SignUpPage from "../screens/SignUpPage";
 import EventFeedPage from "../screens/EventFeedPage";
+import NewEventPage from '../screens/NewEventPage'
 import LoggedInLandingPage from "../screens/LoggedInLanding"
 import { updateUser } from '../store/actions/user.actions';
 import {ProfilePage} from '../screens/ProfilePage';
@@ -50,10 +51,10 @@ function EventStackNavigator() {
     <Stack.Navigator initialRouteName="EventFeedPage">
       <Stack.Screen name="EventFeedPage" component={EventFeedPage} options ={{headerShown: false}}/>
       <Stack.Screen name="EventPage" component={EventPage} options = {{headerShown: false}}/>
+      <Stack.Screen name="NewEventPage" component={NewEventPage} options = {{headerShown: false}}/>
     </Stack.Navigator>
   )
 }
-
 
 function ProfileStackNavigator(){
   return (

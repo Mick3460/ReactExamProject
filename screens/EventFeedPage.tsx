@@ -37,9 +37,10 @@ export default function EventFeedPage({navigation}) {
 
     return (
         <SafeAreaView>
-        <TouchableOpacity style={{margin:30}} onPress={() => navigation.navigate("NewEventPage")}><Text>NEW</Text></TouchableOpacity>
+        
             <View style={styles.topBar}>
                 <Text style={styles.barText}>EVENT FEED</Text>
+                <TouchableOpacity style={styles.newEvent} onPress={() => navigation.navigate("NewEventPage")}><Text style={{color: '#fff'}}> NEW EVENT </Text></TouchableOpacity>
             </View>
             <SafeAreaView style={styles.container}>
             
@@ -69,13 +70,13 @@ const styles = StyleSheet.create({
     topBar: {
         flex: 1,
         alignItems: 'center',
-        minHeight: 120,
+        minHeight: 130,
         width: '100%',
         backgroundColor: '#fff',
     },
     barText: {
         marginTop: 50,
-        marginBottom: 30,
+        marginBottom: 7,
         fontSize: 30,
         fontWeight: 'bold',
         color: 'rgb(30, 120, 190)'
@@ -85,6 +86,11 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     scrollable: {
-        marginBottom: 120
+        marginBottom: 130
     },
+    newEvent: {
+        margin: 0,
+        borderRadius: 5,
+        backgroundColor: 'rgb(30, 120, 190)',
+    }
 })  

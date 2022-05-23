@@ -7,6 +7,7 @@ import { StackParamList } from '../typings/navigations';
 import { createEventFirebase } from '../store/actions/event.actions';
 import {EventBlogItem} from '../entities/EventBlogItem'
 import { Picker } from "@react-native-picker/picker";
+import SelectDropdown from 'react-native-select-dropdown'
 
 
 // export default function NewEventPage() {
@@ -79,35 +80,33 @@ import { Picker } from "@react-native-picker/picker";
 // }
 
 export default function NewEventPage() {
-    const [startMonth, setStartMonth] = useState('')
+    const [startMonth, setStartMonth] = useState(0)
+    const months = ["January", "February", "March", "April", "May", "June", "July", "August", "October", "November", "December"]
     return (
         <View style={styles.container}>
             
             <View style={styles.rightOuterBox}>
                 <View style={styles.allOfSignup}>
                     <View>
-                        <Text style={styles.bigText}> New member? Sign up! </Text>
+                        <Text style={styles.bigText}> New event? </Text>
                     </View>
                     <View style={styles.signupBox}>
-                        {/* <Picker
-                            selectedValue={startMonth}
-                            onValueChange={(value, index) => setStartMonth(value)} // we don't need to use index here.
-                            mode="dropdown" // Android only
-                            style={styles.picker}
-                        >   <Picker.Item label="Month" value={0} />
-                            <Picker.Item label="January" value={1} />
-                            <Picker.Item label="February" value={2} />
-                            <Picker.Item label="March" value={3} />
-                            <Picker.Item label="April" value={4} />
-                            <Picker.Item label="May" value={5} />
-                            <Picker.Item label="June" value={6} />
-                            <Picker.Item label="July" value={7} />
-                            <Picker.Item label="August" value={8} />
-                            <Picker.Item label="September" value={9} />
-                            <Picker.Item label="October" value={10} />
-                            <Picker.Item label="November" value={11} />
-                            <Picker.Item label="December" value={12} />
-                        </Picker> */}
+                        <SelectDropdown
+	                        data={months}
+	                        onSelect={(selectedItem, index) => {
+	                        	console.log(selectedItem, index)
+	                        }}
+	                        buttonTextAfterSelection={(selectedItem, index) => {
+	                        	// text represented after item is selected
+	                        	// if data array is an array of objects then return selectedItem.property to render after item is selected
+	                        	return selectedItem
+	                        }}
+	                        rowTextForSelection={(item, index) => {
+	                        	// text represented for each item in dropdown
+	                        	// if data array is an array of objects then return item.property to represent item in dropdown
+	                        	return item
+	                        }}
+                        />
                     </View>
                 </View>
             </View>

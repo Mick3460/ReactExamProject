@@ -33,7 +33,7 @@ async function addANewUserToFireStore(user: User) {
         const docRef = doc(db,"users/"+user.uid) 
         const newDoc = await setDoc(docRef, { 
         
-        displayName: "user.displayname",
+        displayName: "placeholderName",
         first: "Michael",
         last: "Big papa",
         email: user.email,
@@ -56,8 +56,8 @@ async function addANewUserToFireStore(user: User) {
       const docData = mySnapshot.data();
       const user: User = {
           email: docData.email, 
-          displayname: docData.displayName, 
-          photoUrl: docData.photoURL, 
+          displayName: docData.displayName, 
+          photoURL: docData.photoURL, 
           idToken: null, 
           uid: docData.uid, 
           connectedChatroomIds: docData.connectedChatroomIds,

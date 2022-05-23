@@ -16,7 +16,7 @@ import { Picker } from "@react-native-picker/picker";
 
 //     const [title, setTitle] = useState('')
 //     const [startDate, setStartDate] = useState('')
-//     const [startMonth, setStartMonth] = useState('')
+    // const [startMonth, setStartMonth] = useState('')
 //     const [endDate, setEndDate] = useState('')
 //     const [location, setLocation] = useState('')
 //     const [detail, setDetail] = useState('')
@@ -79,11 +79,40 @@ import { Picker } from "@react-native-picker/picker";
 // }
 
 export default function NewEventPage() {
+    const [startMonth, setStartMonth] = useState('')
     return (
-        <View>
-            <Text style={{margin: 100}}>Yayeet</Text>
+        <View style={styles.container}>
+            
+            <View style={styles.rightOuterBox}>
+                <View style={styles.allOfSignup}>
+                    <View>
+                        <Text style={styles.bigText}> New member? Sign up! </Text>
+                    </View>
+                    <View style={styles.signupBox}>
+                        {/* <Picker
+                            selectedValue={startMonth}
+                            onValueChange={(value, index) => setStartMonth(value)} // we don't need to use index here.
+                            mode="dropdown" // Android only
+                            style={styles.picker}
+                        >   <Picker.Item label="Month" value={0} />
+                            <Picker.Item label="January" value={1} />
+                            <Picker.Item label="February" value={2} />
+                            <Picker.Item label="March" value={3} />
+                            <Picker.Item label="April" value={4} />
+                            <Picker.Item label="May" value={5} />
+                            <Picker.Item label="June" value={6} />
+                            <Picker.Item label="July" value={7} />
+                            <Picker.Item label="August" value={8} />
+                            <Picker.Item label="September" value={9} />
+                            <Picker.Item label="October" value={10} />
+                            <Picker.Item label="November" value={11} />
+                            <Picker.Item label="December" value={12} />
+                        </Picker> */}
+                    </View>
+                </View>
+            </View>
         </View>
-    )
+        );
 }
 
 const styles = StyleSheet.create({

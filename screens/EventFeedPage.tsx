@@ -40,10 +40,8 @@ export default function EventFeedPage({navigation}) {
         <TouchableOpacity style={{margin:30}} onPress={() => navigation.navigate("NewEventPage")}><Text>NEW</Text></TouchableOpacity>
             <View style={styles.topBar}>
                 <Text style={styles.barText}>EVENT FEED</Text>
-                
             </View>
             <SafeAreaView style={styles.container}>
-            
             
                 <FlatList // FlatList is scrollable
                     data= {firebaseArray}

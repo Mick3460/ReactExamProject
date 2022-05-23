@@ -29,9 +29,9 @@ export default function SignUpPage() {
             
             <View style={styles.rightOuterBox}>
                 <View style={styles.allOfSignup}>
-                    <View>
-                    <Text style={styles.bigText}> New member? Sign up! </Text>
-                    <Text style={styles.bigText}> To use all our great features like events and chatrooms please sign up!</Text>
+                    <View style={styles.allOfSignup}>
+                    <Text style={styles.bigText}>New member? Sign up!</Text>
+                    <Text style={styles.bigText}>To use all our great features like events and chatrooms please sign up!</Text>
                     </View>
                 <View style={styles.signupBox}>
                     <TextInput value={text} onChangeText={setText} style={styles.textInput} placeholder="Email" />
@@ -67,8 +67,10 @@ const styles = StyleSheet.create({
     },
     allOfSignup: {
         height: '50%',
+        width: '90%',
         justifyContent: 'center',
         alignItems: 'center',
+
         
 
     },
@@ -94,6 +96,7 @@ const styles = StyleSheet.create({
 
     bigText: {
         fontSize: 20,
+        textAlign: 'center'
         
     },
     hugeText: {

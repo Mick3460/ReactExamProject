@@ -18,26 +18,14 @@ export default function ChatroomsPage({route}) {
     const chatroomId = item.id
     let msgArray = item.messages
 
-    async function handleFetchChatroom() {
-        dispatch(await queryChatrooms(user))
-    }
 
-    
-    /*
-    useEffect(() => { 
-    //handleFetchChatroom()
-
-    }, [] );
-    */
    useEffect(() => {
-   if (chatrooms) {
-    console.log("Update chatrooms useEffect() ")
-   }
+   
    }, [chatrooms]); // The second parameters are the variables this useEffect is listening to for changes.
 
    const handleAddMessage = async () => {
         const msg: Message = new Message(messageInput,user.uid);
-        //msgArray.push(msg)   
+        msgArray.push(msg)   
         dispatch( await addMessage(msg,chatroomId));
         onChangeMessage('')
     }
@@ -45,20 +33,13 @@ export default function ChatroomsPage({route}) {
 
    const renderChatroom = ({ item } : { item: Message }) => (
     <View style={user.uid.trim() == item.sender.trim() ? styles.rightChatBox : styles.leftChatBox}>
-    <Text style={{fontWeight: 'bold', fontSize: 10}}>{item.sender}</Text>
-    <Text style={{fontSize: 14, }}>{item.message}</Text>
-    <Text style={{textAlign: 'right', fontSize:8,}}></Text>
+    <Text style={styles.textMessage}> {item.message} </Text>
+    <Text style={styles.textMessageTime}>{checkTime(item)}</Text>
     </View>
     );
        
     return (
         <View style={styles.container}>
-            
-        <Text>user id token er: </Text>
-        <Text>user id token er: </Text>
-        <Text>user id token er:{user?.connectedChatroomIds.toString()}</Text>
-        <Text style={{fontSize: 12, width:300}}>Email:{user?.email}</Text>
-        <Text style={{fontSize: 12, width:300}}>uid:{user?.uid}</Text>
 
         <FlatList
         style={styles.theList}
@@ -68,10 +49,10 @@ export default function ChatroomsPage({route}) {
         
         />
         <TextInput
-            style={{width:300, borderWidth:2, borderColor: 'green',   }}
+            style={{width:'100%', borderWidth:2, borderColor: 'green',   }}
             onChangeText={onChangeMessage}
             value={messageInput}
-            placeholder="Enter message..."
+            placeholder="  Enter message..."
         />
         
         <TouchableOpacity onPress={handleAddMessage} style={styles.appButtonContainerLeft}>
@@ -81,31 +62,40 @@ export default function ChatroomsPage({route}) {
     )
 }
 
-   /*
-   const checkTime = (item: Chatroom) => {
+   
+   const checkTime = (item: Message) => {
        
-       if (item.timestamp == null)
-       return new Date().toString();
-       if (item.timestamp != null)
-       return item.timestamp.toString();
-       else
-       return new Date().toString();
+       if (item.createdAt == null)
+       return new Date().toDateString();
+       if (item.createdAt != null)
+       return item.createdAt.toDate().toDateString();
+       
    }
 
-   */
+   
 
 const styles = StyleSheet.create({
     //<Button title="Send chat msg" onPress={handleAddChatroom} />
     //<Button title="Go to screen 2" onPress={() => navigation.navigate("Screen2")} />
     container: {
         flex: 1,
-        backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center',
+        backgroundColor: '#fff',
+    },
+    textMessage: {
+        textAlign: "center",
+        fontSize: 14, padding: 5,
+
+    },
+    textMessageTime: {
+        textAlign: "center",
+        fontSize: 10, paddingLeft: 8, paddingRight: 8,
+
     },
     theList: {
-        backgroundColor: 'lightgrey',
-        width: 300,
+        backgroundColor: 'rgb(242,242,242)',
+        width: '100%',
         flexDirection: 'column-reverse'
     },
     leftChatBox: {

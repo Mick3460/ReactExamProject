@@ -18,7 +18,7 @@ export default function ChatroomsPage ({navigation}) {
 
     useEffect(() => { 
         handleFetchChatroom()
-        }, [] );
+        }, [chatrooms] );
     
 /*     
     useEffect(() => {

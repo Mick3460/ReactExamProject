@@ -69,7 +69,7 @@ function ChatroomStackNavigator() {
   return (
     <Stack.Navigator initialRouteName='Chatroom'>
       <Stack.Screen name="Chatroom" component={ChatroomsPage} options={{headerShown: false}}/>
-      <Stack.Screen name="SpecificChatroom" component={ChatroomPage} options={{headerShown: false}}/>
+      <Stack.Screen name="SpecificChatroom" component={ChatroomPage} options={{headerShown: true}}/>
     </Stack.Navigator>
   )
 }

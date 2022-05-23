@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { ImageBackground, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
@@ -11,38 +11,38 @@ import { signUpFirebase } from '../store/actions/user.actions';
 export default function SignUpPage() {
 
     type ScreenNavigationType = NativeStackNavigationProp<
-    StackParamList,"LandingPage" >
+        StackParamList, "LandingPage">
     const [text, setText] = useState('jim@ergod.dk')
     const [passwordStr, setPasswordStr] = useState('lol123')
     const dispatch = useDispatch() //useDispatch er en hook :)
     const navigation = useNavigation<ScreenNavigationType>()
-    
-    function handleAddUser () {
+
+    function handleAddUser() {
         const email = text;
         const pw = passwordStr;
-        signUpFirebase(email,pw)
+        signUpFirebase(email, pw)
         //dispatch(signUp(email,pw));
         //navigation.navigate("LandingPage") //TODO: UNCOMMENT THIS WHEN JIM PUSHES
     }
     return (
         <View style={styles.container}>
-            
-            <View style={styles.rightOuterBox}>
-                <View style={styles.allOfSignup}>
-                    <View>
-                    <Text style={styles.bigText}> New member? Sign up! </Text>
-                    <Text style={styles.bigText}> To use all our great features like events and chatrooms please sign up!</Text>
+            <ImageBackground style={styles.imageBackground} source={require('../assets/homescreenBackground.png')}>
+                <View style={styles.rightOuterBox}>
+                    <View style={styles.allOfSignup}>
+                        <View>
+                            <Text style={styles.bigText}> To use all our great features please sign up!</Text>
+                        </View>
+                        <View style={styles.signupBox}>
+                            <TextInput value={text} onChangeText={setText} style={styles.textInput} placeholder="Email" />
+                            <TextInput value={passwordStr} secureTextEntry={true} onChangeText={setPasswordStr} style={styles.textInput} placeholder="Password" />
+                        </View>
+
+                        <TouchableOpacity onPress={handleAddUser} style={styles.signUpBtn}>
+                            <Text style={styles.signUpBtnText}> SIGN UP </Text>
+                        </TouchableOpacity>
                     </View>
-                <View style={styles.signupBox}>
-                    <TextInput value={text} onChangeText={setText} style={styles.textInput} placeholder="Email" />
-                    <TextInput value={passwordStr} secureTextEntry={true} onChangeText={setPasswordStr} style={styles.textInput} placeholder="Password" />
                 </View>
-                
-                <TouchableOpacity onPress={handleAddUser} style={styles.appButtonContainerRight}>
-                <Text style={styles.appButtonTextRight}> SIGN UP </Text>
-                </TouchableOpacity>
-                </View>
-            </View>
+            </ImageBackground>
 
         </View>
     );
@@ -51,17 +51,15 @@ export default function SignUpPage() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
+    },
+    imageBackground: {
+        flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
     },
-
     rightOuterBox: {
-        backgroundColor: '#009688',
-        
         width: '100%',
         height: '100%',
-
         alignItems: 'center',
         justifyContent: 'center',
     },
@@ -69,7 +67,7 @@ const styles = StyleSheet.create({
         height: '50%',
         justifyContent: 'center',
         alignItems: 'center',
-        
+
 
     },
 
@@ -78,41 +76,44 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         paddingTop: 0,
         paddingBottom: 20,
-        
+
     },
 
     textInput: {
         borderColor: '#000',
-        borderWidth: 1,
-        textAlign: 'center',
         backgroundColor: '#fff',
+        textAlign: 'center',
         padding: 2,
         margin: 1,
         marginBottom: 3,
-        width: 220,
+        width: 200,
+        borderWidth: 1,
+        borderRadius: 5
     },
 
     bigText: {
-        fontSize: 20,
-        
+        fontSize: 15,
+        fontWeight: 'bold',
+        color: "#32305D"
+
     },
     hugeText: {
         fontSize: 40,
     },
-    appButtonContainerRight: {
+    signUpBtn: {
         elevation: 8,
         backgroundColor: "#FDE7E2",
         borderRadius: 10,
         paddingVertical: 10,
         paddingHorizontal: 12
-      },
+    },
 
-      appButtonTextRight: {
+    signUpBtnText: {
         fontSize: 18,
         color: "black",
         fontWeight: "bold",
         alignSelf: "center",
         textTransform: "uppercase"
-      },
+    },
 
 })  

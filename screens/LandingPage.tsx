@@ -52,8 +52,6 @@ export default function LandingPage() {
                         <Text style={styles.signInText}>SIGN IN</Text>
                     </TouchableOpacity>
                 </View>
-
-
             </ImageBackground>
         </View>
 

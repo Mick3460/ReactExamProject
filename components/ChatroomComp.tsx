@@ -69,7 +69,10 @@ const styles = StyleSheet.create({
     imageStyle: {
         width: 60,
         height: 60,
-        borderRadius: 50
+        borderRadius: 50,
+        //borderStartWidth: 1,
+        borderWidth: 1,
+        borderColor: 'black',
     },
     innerProp: {
         marginLeft: 10,

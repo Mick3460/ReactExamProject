@@ -62,13 +62,13 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         //marginTop: 180,
-        minHeight: 120,
+        minHeight: 105,
         width: '100%',
         backgroundColor: '#fff',
     },
     barText: {
-        marginTop: 50,
-        marginBottom: 30,
+        marginTop: 30,
+        marginBottom: 7,
         fontSize: 30,
         fontWeight: 'bold',
         color: 'rgb(30, 120, 190)'

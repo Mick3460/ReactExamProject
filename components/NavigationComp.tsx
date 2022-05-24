@@ -49,9 +49,9 @@ function EventStackNavigator() {
 
 function ProfileStackNavigator(){
   return (
-    <Stack.Navigator initialRouteName='ProfilePage'>
-      <Stack.Screen name='ProfilePage' component={ProfilePage} />
-      <Stack.Screen name="ProfileEditPage" component={ProfileEditPage}/>
+    <Stack.Navigator initialRouteName='ProfilePage' >
+      <Stack.Screen name='ProfilePage' component={ProfilePage} options={{title: "Profile"}} />
+      <Stack.Screen name="ProfileEditPage" component={ProfileEditPage} options={{title: "Edit Profile"}}/>
     </Stack.Navigator>
   )
 }

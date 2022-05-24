@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
     },
     textMessage: {
-        textAlign: "center",
+        textAlign: "left",
         fontSize: 14, padding: 5,
 
     },

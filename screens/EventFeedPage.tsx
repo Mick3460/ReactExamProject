@@ -16,7 +16,7 @@ export default function EventFeedPage({navigation}) {
         handleFetchEvent()
         console.log("at launch")
         }, [] 
-        );
+    );
 
     const renderItem = ({item}: {item: EventBlogItem}) => {
 

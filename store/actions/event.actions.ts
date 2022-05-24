@@ -28,7 +28,6 @@ export const queryEvent = async () => {
 
 export const createEventFirebase = async (event: EventBlogItem) => {
     
-        console.log("eventrrrr:",event);
         addANewEventToFireStore(event)
         return {type: NEWEVENT}
 }

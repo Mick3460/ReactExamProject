@@ -1,13 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { Button, StyleSheet, Text, TextInput, View, Image, TouchableOpacity, ImageBackground } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, Text, TextInput, View, TouchableOpacity, ImageBackground } from 'react-native';
 import { User } from '../entities/User';
 import { useDispatch, useSelector } from 'react-redux';
 import { signInFirebase, } from '../store/actions/user.actions';
-//import { logOut } from '../store/actions/chat.actions';
-import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { StackParamList } from '../typings/navigations';
-//import * as SecureStore from 'expo-secure-store'
 
 type ScreenNavigationType = NativeStackNavigationProp<
     StackParamList,
@@ -21,11 +18,6 @@ export default function LandingPage() {
     const dispatch = useDispatch() //useDispatch er en hook :)
     const user: User = useSelector((state: any) => state.user.loggedInUser) // subscribe to redux store and select attribute 
     const validUser = useSelector((state: any) => state.user.validUser) // subscribe to redux store and select attribute 
-
-
-    //const Stack = createNativeStackNavigator<StackParamList>();
-    //const Tab = createBottomTabNavigator();
-    const navigation = useNavigation<ScreenNavigationType>()
 
     async function handleSignIn() {
         const email = loginText;
@@ -96,7 +88,4 @@ const styles = StyleSheet.create({
         borderRadius: 5
     },
 
-
 })
-
-

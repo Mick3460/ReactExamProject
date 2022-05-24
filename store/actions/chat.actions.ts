@@ -46,7 +46,6 @@ export const queryChatrooms = async (user: User) => {
         const chatroomId = fetchedChatrooms[j].id
         const userOneId = fetchedChatrooms[j].userOne.trim(1)
         const userTwoId = fetchedChatrooms[j].userTwo
-        //const userRef = collection(db, "users/")
         const userOneRef = doc(db, "users/"+userOneId)
         const userTwoRef = doc(db, "users/"+userTwoId)
     
@@ -62,10 +61,8 @@ export const queryChatrooms = async (user: User) => {
         
         querySnapshot.forEach((doc) => {    
             let msg = new Message(doc.data().message, doc.data().sender,doc.data().createdAt)
-            //console.log(doc.data().createdAt);
               
             chatroomObject.messages?.push(msg)
-            // doc.data() is never undefined for query doc snapshots
         });
         
         
@@ -80,7 +77,6 @@ export const queryChatrooms = async (user: User) => {
 export const addMessage = async (msg: Message,chatroomId: string) => {
     
     try {
-        //const docRef = doc(collection(db,"chatrooms/"+chatroomId+"/messages"))
         const newDoc = await addDoc(collection(db,"chatrooms/"+chatroomId+"/messages"), { 
         message: msg.message,
         sender: msg.sender,

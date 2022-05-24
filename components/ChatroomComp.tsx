@@ -1,5 +1,5 @@
 import React from 'react'
-import { View,  Text , StyleSheet, FlatList, TouchableOpacity, Image} from "react-native";
+import { View,  Text , StyleSheet, Image} from "react-native";
 import { Chatroom } from '../entities/Chatroom';
 import { useSelector } from "react-redux";
 
@@ -17,9 +17,7 @@ function trimUsername(name?: string) {
     return name
 }
 
-function findOtherUser(id: string) {
 
-}
 
 //Chatroom objects har id og Messages
 export default function ChatroomComp ({chatroom} : {chatroom: Chatroom}){ //chatroom: Chatroom
@@ -63,14 +61,11 @@ const styles = StyleSheet.create({
         margin: 5,
         minWidth: 320,
         minHeight: 60,
-        //borderRadius: 10,
-        //backgroundColor: 'red'
     },
     imageStyle: {
         width: 60,
         height: 60,
         borderRadius: 50,
-        //borderStartWidth: 1,
         borderWidth: 1,
         borderColor: 'black',
     },

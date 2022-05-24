@@ -34,8 +34,6 @@ export const ProfileEditPage: React.FC = () => {
             description
         }, {merge: true})
         .then(() => {
-            //TODO: add dispatch so the user store get updated with new values locally
-    
     
             dispatch(updateUser({
                 displayName,
@@ -43,7 +41,7 @@ export const ProfileEditPage: React.FC = () => {
                 last,
                 email,
                 description
-            }))
+            } as User))
             
         })
     }

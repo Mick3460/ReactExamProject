@@ -20,14 +20,6 @@ export default function ChatroomsPage ({navigation}) {
         handleFetchChatroom()
         }, [chatrooms,user] );
     
-/*     
-    useEffect(() => {
-    if (chatrooms) {
-    console.log("Update chatrooms useEffect() ")
-    }
-    }, [chatrooms]);
-
- */
     const renderItem = ({item}: {item: Chatroom}) => {
         
         return (

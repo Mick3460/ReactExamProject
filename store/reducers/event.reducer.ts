@@ -9,10 +9,6 @@ const initialState: ReduxState = {
     events: []
 }
 
-interface ReduxAction {
-    type: string,
-    payload?: EventBlogItem // maybe not need a "?"?
-}
 
 const userReducer = (state: ReduxState = initialState, action: any) => {
     switch (action.type) {

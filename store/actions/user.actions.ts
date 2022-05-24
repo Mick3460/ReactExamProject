@@ -15,7 +15,6 @@ const KEY = "AIzaSyA5Yl0sy-HhRBnKNjhYUH0A52O0J2h8gMA";
 
 
 export const updateUser = (userJson: User) => {
-    console.log("updateUser, user action, userJson:",userJson);
     
     return {type: UPDATE_USER, payload: {userJson: userJson} }
 }
@@ -65,7 +64,7 @@ async function addANewUserToFireStore(user: User) {
           first: docData.first,
           last: docData.last,
           description: docData.description,
-        } //,  
+        } 
       return user
     }
   }

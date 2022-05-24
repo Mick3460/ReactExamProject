@@ -16,15 +16,10 @@ const initialState: ReduxState = {
     idToken: undefined,
 }
 
-interface ReduxAction {
-    type: string,
-    payload?: boolean | number | string 
-}
 
 const userReducer = (state: ReduxState = initialState, action: any) => {
     switch (action.type) {
         case SIGNUP:
-            //const newUser = new User(action.payload.email,undefined,undefined,action.payload.idToken)
             return state; 
         
         case SIGNIN:
@@ -41,7 +36,6 @@ const userReducer = (state: ReduxState = initialState, action: any) => {
             
         case UPDATE_USER:
             if (action.payload != null || action.payload != undefined) { 
-                console.log("UPDATE_USER, user reducer, user objekt:",action.payload.userJson);
                 
                 return {...state, validUser: true, loggedInUser:{ ...state.loggedInUser, ...action.payload.userJson}} 
             }

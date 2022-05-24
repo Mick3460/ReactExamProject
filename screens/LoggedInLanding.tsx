@@ -11,7 +11,6 @@ export default function LoggedInLanding() {
     
     function handleLogOut(){
         dispatch(logOut()) // user-clearing method
-        //dispatch(logOut()) // chat-clearing method
     }
 
     return (

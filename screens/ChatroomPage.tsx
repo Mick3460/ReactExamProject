@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { Chatroom } from "../entities/Chatroom";
 import { Message } from "../entities/Message";
-import { addMessage, queryChatrooms } from "../store/actions/chat.actions";
+import { addMessage } from "../store/actions/chat.actions";
 
 
 export default function ChatroomsPage({route}) {
@@ -45,7 +45,6 @@ export default function ChatroomsPage({route}) {
         style={styles.theList}
         data={msgArray}
         renderItem={renderChatroom}
-        //keyExtractor={item => item.sender} // TODO: MAKE A UNIQUE ID ON ITEMS / MESSAGES IN DB
         
         />
         <TextInput
@@ -75,8 +74,6 @@ export default function ChatroomsPage({route}) {
    
 
 const styles = StyleSheet.create({
-    //<Button title="Send chat msg" onPress={handleAddChatroom} />
-    //<Button title="Go to screen 2" onPress={() => navigation.navigate("Screen2")} />
     container: {
         flex: 1,
         alignItems: 'center',

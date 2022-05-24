@@ -19,6 +19,7 @@ export const queryChatroomWhere = async (id:number) => {
     const q = query(chatroomRef, where("chatroomId", "==", id.toString())) //must be a string :rage:
     const querySnapshot = await getDocs(q);
     let chatroom: Object = {};
+    
     querySnapshot.forEach((doc) => {
         chatroom = {
             id: doc.id,

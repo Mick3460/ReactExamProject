@@ -15,17 +15,13 @@ export const ProfileInformation: React.FC<Props> = ({user, navigation}) => {
             <View
                 style={styles.userInformation}
             >
-                <View
-                    style={styles.userInformationImageSection}
-                >
+                <View style={styles.userInformationImageSection}>
                     <Image
                         style={styles.profilePicture}
                         source={{ uri: user.photoURL as string }}
                     />
                 </View>
-                <View
-                    style={styles.userInformationSection}
-                >
+                <View style={styles.userInformationSection}>
                     <Text style={styles.userFullName}>{`${user.first} ${user.last}`}</Text>
                     <View>
                         <Text style={styles.userInfoText}>{user.email}</Text>
@@ -73,6 +69,6 @@ const styles = StyleSheet.create({
     profilePicture: {
         width: 100,
         height: 100,
-        borderRadius: 100 / 2
+        borderRadius: 50
     },
 })

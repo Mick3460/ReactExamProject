@@ -13,10 +13,10 @@ interface Props {
 
 export const ProfilePage: React.FC<Props> = ({navigation}) => {
     const user = useSelector( (state:any) => state.user.loggedInUser )
-    useEffect(() => {console.log("omegalul")}, [user])
-    const dispatch = useDispatch()
+    
+    useEffect(() => { }, [user])
 
-    console.log(user)
+    const dispatch = useDispatch()
 
     return (
         <View>

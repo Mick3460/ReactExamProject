@@ -27,15 +27,6 @@ let user: any = undefined;
 const Stack = createNativeStackNavigator<StackParamList>();
 const Tab = createBottomTabNavigator();
 
-function LoggedInStackNavigator() {
-  return (
-    <Stack.Navigator>
-      <Stack.Screen name="LoggedInLandingPage" component={LoggedInLandingPage} options={{ headerShown: false }}/>
-      <Stack.Screen name="EventFeedPage" component={EventFeedPage} options={{ headerShown: false }}/>
-      <Stack.Screen name="ChatroomsPage" component={ChatroomsPage} options={{ headerShown: false }}/>
-    </Stack.Navigator>
-  );
-}
 
 function LandingPageStackNavigator() {
   return (
@@ -77,24 +68,29 @@ function ChatroomStackNavigator() {
 export default function NavigationComp () {
   const user = useSelector( (state: any) => state.user.loggedInUser)
   const dispatch = useDispatch() //useDispatch er en hook :)
+
+  let userJson;
+  console.log("Vi logger user i NavigationCOmp",user);
   
-  let idToken;
-  let userJson:any;
-
   async function readPersistedUserInfo() {
-    idToken = await SecureStore.getItemAsync('token');
+    //idToken = await SecureStore.getItemAsync('token');
     userJson = await SecureStore.getItemAsync('user');
-
-    if (userJson) {
-      let userParsing = JSON.parse(userJson)
-      let parsedUser = new User(userParsing.email, undefined, undefined, userParsing.idToken)
-      return parsedUser
+    console.log("readPersistedUserInfo");
+    console.log("userJson" ,userJson);
+    console.log("Vi logger user i readPersisted...",user);
+    const savedUser = JSON.parse(userJson)
+    if (userJson != null || userJson != undefined) {
+      console.log("we're inside the if statement, NavigationComp");
+      
+      let userParsing = JSON.parse(userJson) as User
+      
+      return userParsing
     } else {
       return undefined;
     }
   }
-  
-  useEffect(() => {
+
+  useEffect( () => {
     readPersistedUserInfo()
     .then( response => dispatch( updateUser(response!) ) ) 
   }, [])// array of variables that can trigger an update if they change. Pass an// an empty array if you just want to run it once after component mounted. 
@@ -102,9 +98,9 @@ export default function NavigationComp () {
   return (
     <NavigationContainer>
       
-            {user !== undefined ? (
+            {user != undefined ? (
             <Tab.Navigator screenOptions={{ headerShown: false }} >
-                <Tab.Screen name="Home" component={LoggedInLanding} options={{tabBarIcon: ({  }) => (
+                <Tab.Screen name="Home" component={LoggedInLandingPage} options={{tabBarIcon: ({  }) => (
                   <Icon name="home" size={30} color="#0000FF"/>
                 )}}/>
                 <Tab.Screen name="Events" component={EventStackNavigator} options={{tabBarIcon: ({  }) => (

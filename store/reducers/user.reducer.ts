@@ -11,7 +11,7 @@ interface ReduxState {
 }
 
 const initialState: ReduxState = {
-    
+    loggedInUser: undefined,
     validUser: false,
     idToken: undefined,
 }
@@ -40,8 +40,14 @@ const userReducer = (state: ReduxState = initialState, action: any) => {
             return {...state, validUser: false, loggedInUser: undefined, idToken: undefined}
             
         case UPDATE_USER:
-            //console.log("in user reducer",action.payload)
-            return {...state, validUser: true, loggedInUser:{ ...state.loggedInUser, ...action.payload.userJson}}
+            if (action.payload != null || action.payload != undefined) { 
+                console.log("UPDATE_USER, user reducer, user objekt:",action.payload.userJson);
+                
+                return {...state, validUser: true, loggedInUser:{ ...state.loggedInUser, ...action.payload.userJson}} 
+            }
+            else {
+                return state
+            }
         case ERROR:
             return state
         default: 

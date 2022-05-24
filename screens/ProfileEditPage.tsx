@@ -48,7 +48,7 @@ export const ProfileEditPage: React.FC = () => {
         })
     }
 
-    const [displayname, setDisplayname] = useState(user.displayName)
+    const [displayName, setDisplayName] = useState(user.displayName)
     const [first, setFirst] = useState(user.first)
     const [last, setLast] = useState(user.last)
     const [email, setEmail] = useState(user.email)
@@ -61,7 +61,7 @@ export const ProfileEditPage: React.FC = () => {
             <TextInput
                 defaultValue={auth.currentUser?.displayName as string}
                 autoCorrect={false}
-                onChangeText={setDisplayname}
+                onChangeText={setDisplayName}
                 style={styles.inputFields}
             />
             <Text>First Name</Text>
@@ -97,7 +97,7 @@ export const ProfileEditPage: React.FC = () => {
 
             <Button
             title='Save Changes'
-            onPress={() => handleUpdateUserInfo(displayname!, first!, last!, email!, description!)}
+            onPress={() => handleUpdateUserInfo(displayName!, first!, last!, email!, description!)}
             />
         </View>
     )

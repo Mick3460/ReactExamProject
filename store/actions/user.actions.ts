@@ -14,14 +14,16 @@ export const ERROR = "ERROR"
 const KEY = "AIzaSyA5Yl0sy-HhRBnKNjhYUH0A52O0J2h8gMA";
 
 
-export const updateUser = (userJson: any) => {
-    return {type: UPDATE_USER, payload:{userJson}}
+export const updateUser = (userJson: User) => {
+    console.log("updateUser, user action, userJson:",userJson);
+    
+    return {type: UPDATE_USER, payload: {userJson: userJson} }
 }
 
 export const logOut = () => {
-    SecureStore.deleteItemAsync('idToken')
+    SecureStore.deleteItemAsync('token')
     SecureStore.deleteItemAsync('user')
-    signOut(auth)
+    signOut(auth) //firebase
     .then(() => console.log("Signed out"))
     .catch(() => console.log("error signing out"))
     return {type: LOGOUT}
@@ -74,7 +76,7 @@ export const signUpFirebase = async (email: string,password: string) => {
     const user = response.user
     if (user.email != null ) {
         const userr = new User(user.email, user.displayName as string ,user.photoURL as string, user.stsTokenManager.accessToken as string, user.uid)
-        console.log("userr:",userr);
+        
         addANewUserToFireStore(userr)
         return {type: SIGNUP}
     }
@@ -87,8 +89,11 @@ export const signInFirebase = async (email:string ,password: string) => {
     const idToken = response._tokenResponse.idToken
     const fetchUser = await readASingleUserDocument(userUid) as User
     fetchUser.idToken = idToken
-    console.log("&¤#&¤#¤&/fetchuser: ",fetchUser)
-    return {type: SIGNIN, payload: {user: fetchUser, registered: true}} //TODO:FIKS
+
+    //can only save objects as strings in Secure Store
+    await SecureStore.setItemAsync('user', JSON.stringify(fetchUser)) //converts user object to JSON because it only reads strings.
+
+    return {type: SIGNIN, payload: {user: fetchUser, registered: true}} 
 }
 
 
